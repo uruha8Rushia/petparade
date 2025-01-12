@@ -1,32 +1,55 @@
-/* Navbar styles */
+/* Full container covering half the page */
+.header-container {
+    height: 100vh; /* 50% of the viewport height */
+    background-image: url(C:\petshop\petparade\public\nav_bar.png); /* Replace with your image path */
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
+    display: flex; /* Optional: To align content inside */
+    justify-content: center; /* Optional: Center content horizontally */
+    align-items: center; /* Optional: Center content vertically */
+}
 
+/* Navbar styles */
 .navbar {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #333;
+    position: absolute; /* Position the navbar absolutely */
+    top: 10px; /* Adjust the top distance */
+    right: 50px; /* Adjust the right distance */
+    background-color: transparent; /* Keep it transparent to show the image */
     padding: 10px 20px;
-  }
-  
-  .nav-list {
+}
+
+.nav-list {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-  }
-  
-  .nav-item {
-    margin: 0 15px;
-  }
-  
-  .nav-link {
-    color: #fff;
+}
+
+.nav-item {
+    margin: 0 35px;
+}
+
+.nav-link {
+    color: rgb(121, 80, 24);
     text-decoration: none;
-    font-size: 18px;
+    font-size: 25px;
     transition: color 0.3s ease;
-  }
-  
-  .nav-link:hover {
+    font-weight: bold;
+}
+
+.nav-link:hover {
     color: #f4a261; /* Highlight color on hover */
-  }
-  
+}
+
+.nav-logo {
+    margin-top: 20px;
+    height: 100px; /* Adjust the height of the logo */
+    width: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Optional: Add pointer cursor */
+    position: absolute;
+    left: -800px;
+}
