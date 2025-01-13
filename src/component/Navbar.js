@@ -34,7 +34,7 @@ const Navbar = () => {
             </form>
           </li>
           <li className="nav-item">
-          <NavLink
+            <NavLink
               to="/"
               className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
             >
@@ -64,6 +64,17 @@ const Navbar = () => {
             >
               FAQ
             </NavLink>
+          </li>
+          {/* Icons Section */}
+          <li className="nav-item nav-icons">
+            <NavLink to="/favorites" className="nav-icon">
+              <i className="fas fa-heart"></i> {/* Favorite Icon */}
+            </NavLink>
+            <NavLink to="/cart" className="nav-icon">
+              <i className="fas fa-shopping-cart"></i> {/* Cart Icon */}
+            </NavLink>
+            <NavLink to="/user" className="nav-icon">
+            <img src="/user_icon.png" alt="User Icon" className="custom-user-icon" /> {/* User Icon */}            </NavLink>
           </li>
         </ul>
       </nav>
