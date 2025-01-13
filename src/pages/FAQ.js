@@ -1,9 +1,25 @@
-import React from "react";
+import React from 'react';
+import './FAQ.css'; // Add custom styles for the page
 
 const FAQ = () => {
+  const categories = [
+    { name: 'Order', icon: 'order_icon.png', link: '/order-faq' },
+    { name: 'Payment', icon: 'payment_icon.png', link: '/payment-faq' },
+    { name: 'Delivery', icon: 'delivery_icon.png', link: '/delivery-faq' },
+    { name: 'Returns', icon: 'returns_icon.png', link: '/returns-faq' },
+  ];
+
   return (
-    <div>
-      <h1>Welcome to the FAQ Page!</h1>
+    <div className="faq-page">
+      {/* FAQ Categories with Icons */}
+      <div className="faq-categories">
+        {categories.map((category, index) => (
+          <a href={category.link} key={index} className="faq-category">
+            <img src={category.icon} alt={category.name} className="faq-category-icon" />
+            <span>{category.name}</span>
+          </a>
+        ))}
+      </div>
     </div>
   );
 };
