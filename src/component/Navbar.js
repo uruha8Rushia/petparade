@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -34,24 +34,36 @@ const Navbar = () => {
             </form>
           </li>
           <li className="nav-item">
-            <Link to="/" className="nav-link">
+          <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+            >
               Home
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/about" className="nav-link">
-              About Us
-            </Link>
+            <NavLink
+              to="/about"
+              className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+            >
+              About
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/product" className="nav-link">
+            <NavLink
+              to="/product"
+              className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+            >
               Product
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/FAQ" className="nav-link">
-              FAQs
-            </Link>
+            <NavLink
+              to="/FAQ"
+              className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+            >
+              FAQ
+            </NavLink>
           </li>
         </ul>
       </nav>
