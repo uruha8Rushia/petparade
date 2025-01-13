@@ -38,11 +38,10 @@
   }
   
   .faq-category-icon {
-    width: 80px;
-    height: 80px;
+    width: 200px;
+    height: 200px;
     margin-bottom: 10px;
-    object-fit: contain;
-    border-radius: 50%;
+    object-fit: cover;
     background-color: #f9f9f9;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

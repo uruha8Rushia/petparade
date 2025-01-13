@@ -5,6 +5,11 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Product from "./pages/Product";
 import FAQ from "./pages/FAQ";
+import OrderFAQ from "./pages/FAQ_category/OrderFAQ";
+import PaymentFAQ from "./pages/FAQ_category/PaymentFAQ";
+import DeliveryFAQ from "./pages/FAQ_category/DeliveryFAQ";
+import ReturnsFAQ from "./pages/FAQ_category/ReturnsFAQ";
+
 
 function App() {
   return (
@@ -20,7 +25,15 @@ function App() {
         {/* Product page */}
         <Route path="/product" element={<Product />} />
 
-        <Route path="/faq" element={<FAQ />} /> {/* FAQ Route */}
+        {/* FAQ page */}
+        <Route path="/faq" element={<FAQ />} /> 
+
+        {/* FAQ Category Routes */}
+        <Route path="/order-faq" element={<OrderFAQ />} />
+        <Route path="/payment-faq" element={<PaymentFAQ />} />
+        <Route path="/delivery-faq" element={<DeliveryFAQ />} />
+        <Route path="/returns-faq" element={<ReturnsFAQ />} />
+
       </Routes>
     </Router>
   );

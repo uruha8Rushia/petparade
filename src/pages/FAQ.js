@@ -11,6 +11,7 @@ const FAQ = () => {
 
   return (
     <div className="faq-page">
+      <h1>Frequently Asked Questions</h1>
       {/* FAQ Categories with Icons */}
       <div className="faq-categories">
         {categories.map((category, index) => (
