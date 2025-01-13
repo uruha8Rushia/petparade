@@ -1,7 +1,7 @@
 /* Full container covering half the page */
 .header-container {
     height: 100vh; /* 50% of the viewport height */
-    background-image: url(C:\petshop\petparade\public\nav_bar.png); /* Replace with your image path */
+    background-image: url('/public/nav_bar.png'); /* Replace with your image path */
     background-size: cover; /* Ensure the image covers the entire container */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repeating */
