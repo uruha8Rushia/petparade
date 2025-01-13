@@ -1,85 +1,174 @@
-/* about.css */
 .about-container {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Modern and clean font */
     line-height: 1.6;
-  }
-  
-  .about-header {
-    background-color: #f8dfd9;
-    padding: 20px;
+    color: #333; /* Default text color for readability */
+}
+
+.about-header {
+    position: relative;
     text-align: center;
-  }
-  
-  .about-logo {
-    width: 100px;
-    margin-bottom: 10px;
-  }
-  
-  .about-title {
+    color: white;
+    font-family: 'Poppins', sans-serif; /* Ensure uniform font for the header */
+}
+
+.about-header-image {
+    width: 100%;
+    height: 650px;
+    object-fit: cover; /* Ensures image fills space while maintaining proportions */
+    object-position: center; /* Centers the important part of the image */
+    display: block;
+    filter: brightness(63%); /* Darkens the image for better text visibility */
+}
+
+.header-text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.header-title {
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 0;
+    color: white; /* Clean white for the title */
+}
+
+.header-description {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #ffffff; /* Clean white for the description */
+}
+
+.about-main {
+    padding: 0px;
+    background-color: #f9f9f9; /* Light gray for a subtle background contrast */
+}
+
+.about-story {
+    margin-bottom: 0; /* Reduces margin between "Our Services" and the section above */
+}
+
+.services-section {
+    background-color: #f9f1e9; /* Beige background color */
+    margin: 0; /* Removes margin around the section */
+    padding: 30px 0; /* Adjusted padding to remove excess */
+    text-align: center;
+    width: 100%; /* Ensures the section spans the full width */
+    box-sizing: border-box; /* Includes padding in width calculation */
+}
+
+.services-title {
     font-size: 2.5rem;
-    margin: 0;
-  }
-  
-  .about-tagline {
+    color: #d97642; /* Warm orange to match a pet-friendly theme */
+    margin-bottom: 20px; /* Adjusted spacing */
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.services-description {
     font-size: 1.2rem;
-    margin: 0;
     color: #555;
-  }
-  
-  .about-main {
-    padding: 40px 20px;
-  }
-  
-  .about-story {
-    max-width: 800px;
-    margin: 0 auto;
+    margin-bottom: 30px; /* Reduced spacing */
+    line-height: 1.6; /* Adjusted line spacing */
+}
+
+.services-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px; /* Space between service cards */
+}
+
+.service-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
     text-align: center;
-  }
-  
-  .about-story h2 {
-    color: #d97642;
-    font-size: 2rem;
-  }
-  
-  .about-story p,
-  .about-story ul {
+    padding: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.service-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.service-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.service-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* New Section: Image on the left and description on the right */
+.image-description-section {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    background-color: #ffffff; /* White background for the section */
+    gap: 30px; /* Space between image and text */
+    box-sizing: border-box; /* Ensures proper spacing */
+}
+
+.description-image {
+    flex: 1;
+    height: 500px; /* Adjust the height */
+    width: 45%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.description-content {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+}
+
+.description-title {
+    font-size: 2.5rem;
+    color: #d97642; /* Dark text for readability */
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.description-text {
+    font-size: 1.2rem;
     color: #555;
-    font-size: 1.1rem;
-  }
-  
-  .about-story ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .about-story ul li {
-    margin: 5px 0;
-  }
-  
-  .about-feline-managers {
-    margin-top: 40px;
-    text-align: center;
-  }
-  
-  .about-feline-managers h2 {
-    color: #d97642;
-    font-size: 2rem;
-  }
-  
-  .about-feline-managers p {
-    color: #555;
-    font-size: 1.1rem;
-  }
-  
-  .about-footer {
+    line-height: 1.8;
+}
+
+/* Footer Section */
+.about-footer {
     background-color: #f8dfd9;
     padding: 20px;
     text-align: center;
-    margin-top: 40px;
-  }
-  
-  .about-footer p {
+    margin-top: 60px;
+}
+
+.about-footer p {
     color: #555;
-    font-size: 0.9rem;
-  }
-  
+    font-size: 1rem;
+    margin: 0;
+}
