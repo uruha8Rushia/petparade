@@ -157,15 +157,17 @@
   
   /* Modal Content */
   .modal-content {
-    background: white;
+    background-image: url("/public/profile-background.png"); /* Correctly wrapped in url() */
     padding: 20px;
     border-radius: 10px;
     width: 1000px;
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
+    background-size: cover; /* Ensures the background covers the entire area */
+    background-position: center; /* Centers the background image */
+}
+
   /* Close Button */
   .close-button {
     position: absolute;
@@ -185,7 +187,7 @@
     width: 1000px;
     max-width: 90%;
     padding: 20px;
-    background: #fff;
+    background-image: "/profile-background";
     border-radius: 10px;
     position: relative;
     text-align: left;
@@ -234,9 +236,10 @@
 
   .user-profile-modal {
     width: 1000px;
-    max-width: 40%;
+    max-width: 30%;
     padding: 20px;
-    background: #fff;
+    height: 80%;
+    background-image: "/public/user-background.png";
     border-radius: 10px;
     position: relative;
     text-align: center;
@@ -250,31 +253,97 @@
   }
   
   .profile-picture {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    border: 5px solid rgb(150, 145, 145);
   }
   
   .user-info {
     margin-bottom: 20px;
     font-size: 16px;
     line-height: 1.5;
+    text-align: center;
+    margin-bottom: 60px;
   }
   
-  .user-actions button {
-    margin: 5px;
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
+  .tab-buttons {
+    display: flex;
+    border: 1px solid rgba(148, 148, 148, 0.557);
     border-radius: 5px;
-    background-color: #f4a261;
-    color: white;
+    overflow: hidden; /* Ensure sections align without overflow */
+  }
+  
+  .tab-button {
+    flex: 1;
+    padding: 10px 20px;
+    background-color: #ffffff3b;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    border: 1px;
+    outline: 1px;
     cursor: pointer;
     transition: background-color 0.3s;
   }
   
-  .user-actions button:hover {
+  .tab-button:not(:last-child) {
+    border-right: 1px solid rgba(148, 148, 148, 0.557); /* Separator between sections */
+  }
+  
+  .tab-button.active {
+    background-color: #f7ac9967; /* Highlight for active section */
+  }
+  
+  
+  .tab-panel {
+    display: none; /* Hide all panels by default */
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .tab-panel.active {
+    display: block; /* Show the active panel */
+  }
+  
+  .favorites-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .favorites-table th,
+  .favorites-table td {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .favorite-item {
+    display: flex; /* Set the parent container as a flexbox */
+    align-items: center; /* Vertically align items */
+  }
+  
+  .favorite-item-image {
+    width: 100px; /* Set a fixed width */
+    height: 100px; /* Set a fixed height */
+    object-fit: cover; /* Maintain image aspect ratio */
+    margin-right: 15px; /* Add spacing between the image and text */
+  }
+  
+  .add-to-cart-button {
+    background-color: #f4a261;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-to-cart-button:hover {
     background-color: #e76f51;
   }
   

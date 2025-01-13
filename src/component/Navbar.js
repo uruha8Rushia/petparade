@@ -140,6 +140,54 @@ const Navbar = () => {
             <button className="close-button" onClick={closeModal}>
               &times;
             </button>
+            {modalContent === "Favorite Items" && (
+            <>
+              <h2>Your Favorites</h2>
+              <table className="favorites-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      id: 1,
+                      name: "Favorite Item 1",
+                      image: "/favorite1.png", // Replace with your image path
+                    },
+                    {
+                      id: 2,
+                      name: "Favorite Item 2",
+                      image: "/favorite2.png", // Replace with your image path
+                    },
+                  ].map((item) => (
+                    <tr key={item.id}>
+                      <td>
+                        <div className="favorite-item">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="favorite-item-image"
+                          />
+                          <span className="item-name">{item.name}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <button
+                          className="add-to-cart-button"
+                          onClick={() => console.log(`Add ${item.name} to cart`)}
+                        >
+                          Add to Cart
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
             {modalContent === "Cart Items" && (
               <>
                 <h2>Your Cart</h2>
@@ -180,12 +228,6 @@ const Navbar = () => {
                 </div>
               </>
             )}
-            {modalContent === "Favorite Items" && (
-              <>
-                <h2>Your Favorites</h2>
-                <p>You currently have no favorite items.</p>
-              </>
-            )}
             {modalContent === "User Profile" && (
               <>
                 <h2>User Profile</h2>
@@ -198,10 +240,10 @@ const Navbar = () => {
                     <p><strong>Account Type:</strong> Premium</p>
                     <p><strong>Member Since:</strong> January 2021</p>
                   </div>
-                  <div className="user-actions">
-                    <button>Edit Profile</button>
-                    <button>View Order History</button>
-                    <button>Manage Addresses</button>
+                  <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="edit">View Profile</button>
+                    <button class="tab-button" data-tab="order-history">View Order History</button>
+                    <button class="tab-button" data-tab="addresses">Manage Addresses</button>
                   </div>
                 </div>
               </>
