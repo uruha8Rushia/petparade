@@ -1,25 +1,23 @@
 /* Full container covering half the page */
 .header-container {
-    height: 100vh; /* 50% of the viewport height */
-    background-image: url('/public/nav_bar.png'); /* Replace with your image path */
-    background-size: cover; /* Ensure the image covers the entire container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent repeating */
-    display: flex; /* Optional: To align content inside */
-    justify-content: center; /* Optional: Center content horizontally */
-    align-items: center; /* Optional: Center content vertically */
+  width: 100%;
+  background-image: url(/public/nav_bar.png); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden; /* Avoid content spilling over */
 }
-
 /* Navbar styles */
 .navbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: absolute; /* Position the navbar absolutely */
-    top: 10px; /* Adjust the top distance */
+    top: -15px; /* Adjust the top distance */
     right: 50px; /* Adjust the right distance */
     background-color: transparent; /* Keep it transparent to show the image */
     padding: 10px 20px;
+    
 }
 
 .nav-list {
@@ -34,22 +32,81 @@
 }
 
 .nav-link {
+    position: relative;
     color: rgb(121, 80, 24);
     text-decoration: none;
-    font-size: 25px;
+    font-size: 23px;
+    margin-left: 15px;
     transition: color 0.3s ease;
     font-weight: bold;
-}
-
-.nav-link:hover {
+    top: 4px;
+  }
+  
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Adjust as needed */
+    width: 0;
+    height: 2px; /* Thickness of the underline */
+    background-color: #f4a261; /* Color of the underline */
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover {
     color: #f4a261; /* Highlight color on hover */
-}
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
 
-.nav-logo {
-    margin-top: 20px;
+  .nav-logo {
     height: 100px; /* Adjust the height of the logo */
     width: auto; /* Maintain aspect ratio */
-    cursor: pointer; /* Optional: Add pointer cursor */
-    position: absolute;
-    left: -800px;
+    display: block; /* Ensure the logo is visible */
+    position: relative; /* Ensure it's positioned properly in the navbar */
+    z-index: 10; /* Bring the logo above other elements */
+    left: -100px
+  }
+
+  .search-bar-item {
+    flex: 1; /* Ensure the search bar adjusts flexibly */
+    display: flex;
+    justify-content: center; /* Center the search bar */
+    margin-right: 150px;
 }
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background-color: transparent;
+}
+  
+  .search-input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    width: 200px;
+    background-color: transparent;
+  }
+  
+  .search-button {
+    background-color: transparent;
+    color: #f4a261;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .search-button:hover {
+    background-color: #f29077;
+    color: white;
+  }
