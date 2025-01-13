@@ -14,7 +14,7 @@
     align-items: center;
     position: absolute; /* Position the navbar absolutely */
     top: -15px; /* Adjust the top distance */
-    right: 50px; /* Adjust the right distance */
+    right: 40px; /* Adjust the right distance */
     background-color: transparent; /* Keep it transparent to show the image */
     padding: 10px 20px;
     
@@ -56,6 +56,9 @@
   .nav-link:hover {
     color: #f4a261; /* Highlight color on hover */
   }
+
+  .nav-link.active {
+    color: #f4a261; /* Change this color for the active link */  }
   
   .nav-link:hover::after {
     width: 100%;
@@ -67,7 +70,7 @@
     display: block; /* Ensure the logo is visible */
     position: relative; /* Ensure it's positioned properly in the navbar */
     z-index: 10; /* Bring the logo above other elements */
-    left: -100px
+    left: -50px
   }
 
   .search-bar-item {
@@ -109,4 +112,29 @@
   .search-button:hover {
     background-color: #f29077;
     color: white;
+  }
+
+  .nav-icons {
+    display: flex;
+    gap: 30px; /* Add space between icons */
+    align-items: center; /* Center icons vertically */
+    margin-left: 20px; /* Add spacing from the last nav item */
+    margin-right: -30px;
+  }
+  
+  .nav-icon {
+    color: rgb(121, 80, 24);
+    font-size: 20px; /* Adjust icon size */
+    transition: color 0.3s ease;
+  }
+  
+  .nav-icon:hover {
+    color: #f4a261; /* Change color on hover */
+  }
+  
+  .custom-user-icon {
+    width: 35px; /* Set width */
+    height: 35px; /* Set height */
+    object-fit: contain; /* Ensure the image fits nicely */
+    margin-top: -10px;
   }
