@@ -1,0 +1,85 @@
+/* about.css */
+.about-container {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  .about-header {
+    background-color: #f8dfd9;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .about-logo {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .about-title {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  .about-tagline {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #555;
+  }
+  
+  .about-main {
+    padding: 40px 20px;
+  }
+  
+  .about-story {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .about-story h2 {
+    color: #d97642;
+    font-size: 2rem;
+  }
+  
+  .about-story p,
+  .about-story ul {
+    color: #555;
+    font-size: 1.1rem;
+  }
+  
+  .about-story ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about-story ul li {
+    margin: 5px 0;
+  }
+  
+  .about-feline-managers {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .about-feline-managers h2 {
+    color: #d97642;
+    font-size: 2rem;
+  }
+  
+  .about-feline-managers p {
+    color: #555;
+    font-size: 1.1rem;
+  }
+  
+  .about-footer {
+    background-color: #f8dfd9;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .about-footer p {
+    color: #555;
+    font-size: 0.9rem;
+  }
+  
