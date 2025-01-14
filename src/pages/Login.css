@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('C:\petshop\petparade\public\profile-background.png');
+    background-image: url('/public/profile-background.png');
 }
   
   .login-card {
