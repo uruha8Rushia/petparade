@@ -9,7 +9,7 @@
   
   .login-card {
     background-color: #ffffff89;
-    border-radius: 12px;
+    border-radius: 20px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     padding: 40px 30px;
     width: 100%;
@@ -92,7 +92,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: 200px;
+    width: 180px;
   }
   
   .login-button:hover {
@@ -104,17 +104,25 @@
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+    bottom: 20px;
   }
   
   .login-links a {
+    padding: 8px;
+    background-color: transparent;
+    width: 50px;
+    border-radius: 20px;
+    border: 2px solid #000;
     color: #000000;
-    font-size: 14px;
+    font-size: 12px;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.5s ease;
+    text-align: center;
   }
   
   .login-links a:hover {
-    color: #f4a261;
+    color: white;
+    background-color: rgb(235, 179, 179);
   }
   
   .login-button:focus {

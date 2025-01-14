@@ -10,6 +10,7 @@ import PaymentFAQ from "./pages/FAQ_category/PaymentFAQ";
 import DeliveryFAQ from "./pages/FAQ_category/DeliveryFAQ";
 import ReturnsFAQ from "./pages/FAQ_category/ReturnsFAQ";
 import LoginForm from "./pages/Login";
+import Signup from "./pages/Singup";
 import Footer from "./component/Footer";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
       <Routes>
         {/* Login Page as default */}
         <Route path="/" element={<LoginForm />} />
-        
+        {/* Signup Page */}
+        <Route path="/signup" element={<Signup />} />
         {/* Other routes */}
         <Route
           path="/*"
