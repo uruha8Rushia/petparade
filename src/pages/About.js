@@ -66,9 +66,6 @@ const AboutUs = () => {
         </section>
       </main>
 
-      <footer className="about-footer">
-        <p>&copy; 2025 Pet Parade. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

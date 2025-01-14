@@ -9,6 +9,7 @@ import OrderFAQ from "./pages/FAQ_category/OrderFAQ";
 import PaymentFAQ from "./pages/FAQ_category/PaymentFAQ";
 import DeliveryFAQ from "./pages/FAQ_category/DeliveryFAQ";
 import ReturnsFAQ from "./pages/FAQ_category/ReturnsFAQ";
+import Footer from "./component/Footer";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/returns-faq" element={<ReturnsFAQ />} />
 
       </Routes>
+      <Footer />
     </Router>
   );
 }
