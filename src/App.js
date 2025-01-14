@@ -15,7 +15,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Navbar should not appear on the login page */}
+        {/* Login Page as default */}
+        <Route path="/" element={<LoginForm />} />
+        
+        {/* Other routes */}
         <Route
           path="/*"
           element={
@@ -40,8 +43,6 @@ function App() {
             ) : null
           }
         />
-        {/* Login Page */}
-        <Route path="/login" element={<LoginForm />} />
       </Routes>
     </Router>
   );
