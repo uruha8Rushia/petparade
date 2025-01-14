@@ -10,10 +10,8 @@ import PaymentFAQ from "./pages/FAQ_category/PaymentFAQ";
 import DeliveryFAQ from "./pages/FAQ_category/DeliveryFAQ";
 import ReturnsFAQ from "./pages/FAQ_category/ReturnsFAQ";
 import LoginForm from "./pages/Login";
-import Signup from "./pages/Singup";
+import Signup from "./pages/Signup";
 import Footer from "./component/Footer";
-import '@fontsource/roboto'; // Defaults to weight 400
-
 
 function App() {
   return (
