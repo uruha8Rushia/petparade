@@ -27,24 +27,24 @@ const AboutUs = () => {
           </p>
           <div className="services-grid">
             <div className="service-card">
-              <img src="/care-advice.jpg" alt="Care Advice" className="service-image" />
-              <h3 className="service-title">Care Advice</h3>
+              <img src="/petaccessories.jpg" alt="Pet Accessories" className="service-image" />
+              <h3 className="service-title">Pet Accessories</h3>
               <p className="service-description">
-                Expert advice to keep your pets happy and healthy.
+                Discover a wide range of high-quality pet essentials
               </p>
             </div>
             <div className="service-card">
-              <img src="/veterinary-help.jpg" alt="Veterinary Help" className="service-image" />
-              <h3 className="service-title">Veterinary Help</h3>
+              <img src="/stackleather.jpg" alt="Customization Services" className="service-image" />
+              <h3 className="service-title">Customization Services</h3>
               <p className="service-description">
-                Professional care for your pets' medical needs.
+                Add a unique touch to your pet’s style and needs.
               </p>
             </div>
             <div className="service-card">
-              <img src="/our-tips.jpg" alt="Our Tips" className="service-image" />
+              <img src="/dog.jpg" alt="Our Tips" className="service-image" />
               <h3 className="service-title">Our Tips</h3>
               <p className="service-description">
-                Handy tips for grooming, training, and more.
+                Handy tips for using our products.
               </p>
             </div>
           </div>
@@ -62,6 +62,48 @@ const AboutUs = () => {
             <p className="description-text">
               Pet Parade is born out of a passion for enhancing the lives of pets and their owners. We provide top-quality pet accessories and products, ensuring your furry friends receive the care and comfort they deserve. From delightful treats to functional gear, every item is thoughtfully selected to meet your pet's needs.
             </p>
+          </div>
+        </section>
+
+        {/* Team Section */}
+        <section class="team-section">
+          <h2 class="team-title">Meet Our Purr-fect Team</h2>
+          <p class="team-description">
+            Our Amazing team of animal lovers who work tirelessly to keep everything running smoothly.
+          </p>
+          <div class="team-grid">
+            <div class="team-card">
+              <img src="/worker1.jpg" alt="Worker 1" class="team-image" />
+              <h3 class="team-name">Jun Hao</h3>
+              <p class="team-role">Front-End Developer</p>
+              <p class="team-bio">
+                John brings the user interface to life with seamless designs and interactive elements.
+              </p>
+            </div>
+            <div class="team-card">
+              <img src="/worker2.jpg" alt="Worker 2" class="team-image" />
+              <h3 class="team-name">Jiong Ming</h3>
+              <p class="team-role">Back-End Developer</p>
+              <p class="team-bio">
+                Jane ensures the website runs smoothly with efficient server-side solutions.
+              </p>
+            </div>
+            <div class="team-card">
+              <img src="/worker3.jpg" alt="Worker 3" class="team-image" />
+              <h3 class="team-name">Wei Qing</h3>
+              <p class="team-role">UX/UI Designer</p>
+              <p class="team-bio">
+                Alice crafts engaging designs to enhance the user experience.
+              </p>
+            </div>
+            <div class="team-card">
+              <img src="/worker4.jpg" alt="Worker 4" class="team-image" />
+              <h3 class="team-name">Xin Jing</h3>
+              <p class="team-role">Content Strategist</p>
+              <p class="team-bio">
+                Bob curates the compelling content that brings Pet Parade's vision to life.
+              </p>
+            </div>
           </div>
         </section>
       </main>
