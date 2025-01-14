@@ -29,7 +29,7 @@
     transition: transform 0.3s ease, color 0.3s ease;
     font-size: 1.5em; /* Increase font size */
     padding: 20px; /* Increase padding */
-    width: 200px; /* Increase width */
+    width: 500px; /* Increase width */
   }
   
   .faq-category:hover {
@@ -38,13 +38,11 @@
   }
   
   .faq-category-icon {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     margin-bottom: 10px;
     object-fit: cover;
-    background-color: #f9f9f9;
     padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
   }
   

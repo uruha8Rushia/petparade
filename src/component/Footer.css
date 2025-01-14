@@ -6,8 +6,8 @@
     background-color: #f8dfd9;
     padding: 20px;
     text-align: center;
-    margin-top: 60px;
-    height: 100px; /* Ensure some height for proper centering */
+    margin-top: 100px;
+    height: 50px; /* Ensure some height for proper centering */
 }
 
 .about-footer p {
