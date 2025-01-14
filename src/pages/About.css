@@ -159,16 +159,3 @@
     line-height: 1.8;
 }
 
-/* Footer Section */
-.about-footer {
-    background-color: #f8dfd9;
-    padding: 20px;
-    text-align: center;
-    margin-top: 60px;
-}
-
-.about-footer p {
-    color: #555;
-    font-size: 1rem;
-    margin: 0;
-}

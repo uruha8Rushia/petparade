@@ -10,6 +10,7 @@ import PaymentFAQ from "./pages/FAQ_category/PaymentFAQ";
 import DeliveryFAQ from "./pages/FAQ_category/DeliveryFAQ";
 import ReturnsFAQ from "./pages/FAQ_category/ReturnsFAQ";
 import LoginForm from "./pages/Login";
+import Footer from "./component/Footer";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </Router>
   );
 }

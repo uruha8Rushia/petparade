@@ -1,5 +1,5 @@
 import React from 'react';
-import './FAQ.css'; // Add custom styles for the page
+import './FAQ.css'; 
 
 const FAQ = () => {
   const categories = [
