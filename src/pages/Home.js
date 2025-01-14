@@ -7,6 +7,7 @@ const Home = () => {
   const promoteImages = [
     { src: "/promoted-food.png", alt: "2024 Pet Food Best Seller" },
     { src: "/promoted-acces.png", alt: "Hot Deals Pet Accessories" },
+    { src: "/promoted-delivery.png", alt: "Delivery Information" },
   ];
 
   const topSellerProducts = [
