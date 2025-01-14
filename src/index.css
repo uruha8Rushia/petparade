@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Comic Sans MS";
 }
 
 /* Apply custom scrollbar styles globally */
@@ -26,4 +27,8 @@ html::-webkit-scrollbar-thumb:hover {
 html::-webkit-scrollbar-track {
   background: #f0f0f0; /* Background color of the scrollbar track */
   border-radius: 10px; /* Rounded edges for the track */
+}
+
+h1, h2, h3, p, a {
+  font-family: "Comic Sans MS";
 }

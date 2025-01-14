@@ -12,6 +12,8 @@ import ReturnsFAQ from "./pages/FAQ_category/ReturnsFAQ";
 import LoginForm from "./pages/Login";
 import Signup from "./pages/Singup";
 import Footer from "./component/Footer";
+import '@fontsource/roboto'; // Defaults to weight 400
+
 
 function App() {
   return (

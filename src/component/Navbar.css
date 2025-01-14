@@ -40,6 +40,7 @@
     transition: color 0.3s ease;
     font-weight: bold;
     top: 4px;
+    font-family: "Comic Sans MS";
   }
   
   .nav-link::after {
@@ -118,8 +119,8 @@
     display: flex;
     gap: 30px; /* Add space between icons */
     align-items: center; /* Center icons vertically */
-    margin-left: 70px; /* Add spacing from the last nav item */
-    margin-right: -30px;
+    margin-left: 50gpx; /* Add spacing from the last nav item */
+    margin-right: -20px;
   }
   
   .nav-icon {
