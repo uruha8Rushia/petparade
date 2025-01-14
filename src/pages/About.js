@@ -85,7 +85,8 @@ const AboutUs = () => {
               <h3 class="team-name">Jiong Ming</h3>
               <p class="team-role">Back-End Developer</p>
               <p class="team-bio">
-                Jane ensures the website runs smoothly with efficient server-side solutions.
+                My name is Jiong Ming, you can call me JM. Although my profile picture looks very angry but I'm a very friendly person.
+                My role is to ensures the website runs smoothly with efficient server-side solutions.
               </p>
             </div>
             <div class="team-card">
