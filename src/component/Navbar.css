@@ -70,7 +70,7 @@
     display: block; /* Ensure the logo is visible */
     position: relative; /* Ensure it's positioned properly in the navbar */
     z-index: 10; /* Bring the logo above other elements */
-    left: -50px
+    left: -50px;
   }
 
   .search-bar-item {
