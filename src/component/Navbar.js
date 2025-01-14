@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleLogout = () => {
     // Perform any logout-related actions (e.g., clearing session or local storage)
     console.log("User logged out");
-    navigate("/login"); // Redirect to the login page
+    navigate("/"); // Redirect to the login page
   };
 
   // Cart items with state to allow updates
