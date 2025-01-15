@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../component/Navbar";
-import Footer from "../component/Footer";
 import "./Login.css";
 
 const Login = () => {
@@ -36,7 +34,6 @@ const Login = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="login-container">
         <div className="login-card">
           <div className="login-logo">
@@ -71,7 +68,6 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
