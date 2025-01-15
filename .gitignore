@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore Tomcat log files
+/target/tomcat/logs/*.log
+/target/tomcat/logs/access_log.*
