@@ -104,7 +104,7 @@ const Navbar = () => {
                   to="/about"
                   className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                 >
-                  About
+                  About Us
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -120,7 +120,7 @@ const Navbar = () => {
                   to="/FAQ"
                   className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                 >
-                  FAQ
+                  FAQs
                 </NavLink>
               </li>
               {/* Icons Section */}
@@ -170,12 +170,12 @@ const Navbar = () => {
                     {
                       id: 1,
                       name: "Favorite Item 1",
-                      image: "/favorite1.png", // Replace with your image path
+                      image: "/cart1.png", // Replace with your image path
                     },
                     {
                       id: 2,
                       name: "Favorite Item 2",
-                      image: "/favorite2.png", // Replace with your image path
+                      image: "/cart2.png", // Replace with your image path
                     },
                   ].map((item) => (
                     <tr key={item.id}>
