@@ -25,3 +25,4 @@ yarn-error.log*
 # Ignore Tomcat log files
 /target/tomcat/logs/*.log
 /target/tomcat/logs/access_log.*
+backend/target/tomcat/logs/access_log.2025-01-15
