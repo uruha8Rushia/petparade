@@ -14,7 +14,7 @@
 }
 
 /* Hide the logo on smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 1500px) {
   .nav-logo {
     display: none;
   }
@@ -77,8 +77,10 @@
   border-radius: 20px;
   padding: 5px 10px;
   background-color: transparent;
-  position: relative; /* Allow independent positioning */
-  left: -70px; /* Move the search bar left without affecting other elements */
+  position: relative;
+  left: -70px;
+  width: 50%; /* Fluid width */
+  max-width: 300px; /* Max width for the search bar */
 }
 
 .search-input {
@@ -86,8 +88,7 @@
   outline: none;
   padding: 5px;
   font-size: 16px;
-  width: 200px;
-  background-color: transparent;
+  width: 100%; /* Make input fill available space */
 }
 
 .search-button {
@@ -99,6 +100,8 @@
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  /* Remove fixed width to make the button responsive */
+  margin-left: 10px; /* Space between input and button */
 }
 
 .search-button:hover {
@@ -230,13 +233,19 @@
   }
 
   .search-bar {
-    max-width: 80%; /* Adjust search bar width on smaller screens */
+    width: 60%; /* Increase search bar width on smaller screens */
+    max-width: 250px; /* Set a max-width */
     margin-left: 60px;
     left: -30px;
   }
 
-  .nav-icons {
-    gap: 10px; /* Reduce spacing between icons */
-    top: 6px;
+  .search-button {
+    padding: 5px 12px; /* Adjust button padding for smaller screens */
   }
-}
+
+  .nav-icons {
+    gap: 10px;
+    top: 6px;
+    left: 0; /* Ensure icons are in view */
+  }
+  }
