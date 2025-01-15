@@ -6,6 +6,36 @@
     gap: 20px;
 }
 
+.title-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px 0;
+    margin: 0 auto;
+}
+
+.line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #000000;
+}
+
+.symbol {
+    font-size: 16px;
+    color: #000000;
+    margin: 20px;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+}
+
 .banner-section {
     max-width: 100%;
     display: flex;
@@ -17,6 +47,7 @@
     max-width: 1200px;
     /* Limits the inner content to 1200px */
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .top-seller-section {
@@ -28,10 +59,28 @@
     gap: 20px; /* Adds spacing between cards */
 }
 
-.card {
-    flex: 1 1 calc(25% - 20px); /* Ensures 4 cards fit in one row */
-    max-width: 350px; /* Sets a maximum size for the card */
-    box-sizing: border-box;
+.home-subtitle h2 {
+    font-size: 26px;
+}
+
+.top-seller-button {
+    background-color: transparent;
+    border-width: 2px;
+    border-radius: 20px;
+    border-color: rgb(234, 134, 104);
+    color: rgb(234, 134, 104);
+    padding: 10px 15px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: 1200px;
+}
+
+.top-seller-button:hover {
+    background-color: rgb(234, 134, 104);
+    color: white;
 }
 
 /* Responsive Design */
