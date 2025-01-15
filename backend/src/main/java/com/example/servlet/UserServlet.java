@@ -34,11 +34,13 @@ public class UserServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
+        String role = req.getParameter("role"); // Get role from request
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
+        user.setRole(role);
 
         boolean success = userService.register(user);
 
@@ -55,12 +57,12 @@ public class UserServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        boolean success = userService.login(username, password);
+        User user = userService.login(username, password);
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        if (success) {
-            resp.getWriter().write("{\"message\": \"Login successful\"}");
+        if (user != null) {
+            resp.getWriter().write("{\"message\": \"Login successful\", \"role\": \"" + user.getRole() + "\"}");
         } else {
             resp.getWriter().write("{\"message\": \"Invalid username or password\"}");
         }
