@@ -1,3 +1,11 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    box-sizing: border-box; /* Include padding and borders in total dimensions */
+    width: 100%; /* Ensure the body spans the full width of the viewport */
+  }
+
 .about-container {
     font-family: 'Poppins', sans-serif; /* Modern and clean font */
     line-height: 1.6;
@@ -44,83 +52,79 @@
     color: #ffffff; /* Clean white for the description */
 }
 
+/* About Main Section */
 .about-main {
-    padding: 0px;
-    background-color: #f9f9f9; /* Light gray for a subtle background contrast */
-}
-
-.about-story {
-    margin-bottom: 0; /* Reduces margin between "Our Services" and the section above */
-}
-
-.services-section {
-    background-color: #f9f1e9; /* Beige background color */
-    margin: 0; /* Removes margin around the section */
-    padding: 20px 0; /* Adjusted padding to remove excess */
+    background-color: #f9f9f9;
+  }
+  
+  /* Services Section */
+  .services-section {
+    background-color: #f9f1e9;
+    margin: 0 auto;
+    padding: 40px 20px;
     text-align: center;
-    width: 100%; /* Ensures the section spans the full width */
-    box-sizing: border-box; /* Includes padding in width calculation */
-}
-
-.services-title {
+    width: 100%;
+    position: relative;
+    left: -20px;
+  }
+  
+  .services-title {
     font-size: 2.5rem;
-    color: #d97642; /* Warm orange to match a pet-friendly theme */
-    margin-bottom: 0px; /* Adjusted spacing */
-    font-family: 'Poppins', sans-serif;
+    color: #d97642;
+    margin-bottom: 20px;
     font-weight: bold;
-}
-
-.services-description {
+  }
+  
+  .services-description {
     font-size: 1.2rem;
     color: #555;
-    margin-bottom: 30px; /* Reduced spacing */
-    line-height: 1.6; /* Adjusted line spacing */
-    height: 60px; /* Fixed height for text to align all images */
-}
-
-.services-grid {
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+  .services-grid {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center; /* Aligns all images vertically */
-    gap: 30px; /* Consistent spacing between images */
-}
-
-.service-card {
+    flex-wrap: wrap; /* Enable wrapping for responsiveness */
+    justify-content: center;
+    gap: 60px; /* Consistent spacing between service cards */
+  }
+  
+  .service-card {
     text-align: center;
-    border: none; /* Removes card border */
-    box-shadow: none; /* Removes card shadow */
-    background: none; /* Removes background color */
-    padding: 0; /* Removes padding around the circle */
-}
-
-.service-image {
-    width: 260px; /* Adjust the size as per your design */
-    height: 260px; /* Make width and height equal for a perfect circle */
-    object-fit: cover; /* Ensures the image fills the circle without distortion */
-    border-radius: 50%; /* Makes the image circular */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-    margin: 0 auto 15px auto; /* Centers the image and adds spacing below */
-    display: block; /* Ensures the image behaves as a block element */
-}
-
-.service-title {
+    border: none;
+    background: none;
+    padding: 20px;
+    width: 100%;
+    max-width: 260px; /* Set a maximum width for each card */
+  }
+  
+  .service-image {
+    width: 100%;
+    max-width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto 15px auto;
+  }
+  
+  .service-title {
     font-size: 1.5rem;
-    color: #333;
     margin: 10px 0;
     font-weight: bold;
-}
-
-.service-description {
+    color: #333;
+  }
+  
+  .service-description {
     font-size: 1rem;
     color: #666;
     line-height: 1.5;
-}
+  }
 
-/* New Section: Image on the left and description on the right */
-.image-description-section {
+  .image-description-section {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     background-color: #ffffff; /* White background for the section */
     gap: 30px; /* Space between image and text */
     box-sizing: border-box; /* Ensures proper spacing */
@@ -128,16 +132,21 @@
 
 .description-image {
     flex: 1;
-    height: 500px; /* Adjust the height */
-    width: 45%;
+    width: 100%; /* Allow the image to take up the full available space */
+    max-width: 650px; /* Maintain the original width */
+    height: auto; /* Maintain aspect ratio */
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 0; /* Remove any default margin */
+    position: relative;
 }
 
 .description-content {
     flex: 1;
     text-align: left;
     padding: 20px;
+    width: 100%; /* Allow text to resize dynamically */
+    max-width: 600px; /* Set a limit for the text container */
 }
 
 .description-title {
@@ -153,6 +162,48 @@
     color: #555;
     line-height: 1.8;
 }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .image-description-section {
+        flex-direction: column; /* Stack the image and text vertically */
+        gap: 20px;
+    }
+
+    .description-image {
+        width: 90%; /* Shrink image slightly for smaller screens */
+        max-width: 90%; /* Ensure it doesn't exceed the screen width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .description-content {
+        text-align: center; /* Center-align text on smaller screens */
+        padding: 10px;
+    }
+
+    .description-title {
+        font-size: 2rem; /* Adjust title size for smaller screens */
+    }
+
+    .description-text {
+        font-size: 1rem; /* Adjust text size for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .description-image {
+        width: 100%; /* Allow the image to fully span the screen */
+    }
+
+    .description-title {
+        font-size: 1.8rem; /* Further reduce title size */
+    }
+
+    .description-text {
+        font-size: 0.9rem; /* Adjust text size for very small screens */
+    }
+}
+
 
 .team-section {
     padding: 40px 20px;
@@ -223,3 +274,23 @@
     line-height: 1.4;
   }
 
+  @media (max-width: 1024px) {
+    .product-card {
+      flex: 1 1 calc(50% - 40px); /* 2 cards per row */
+      max-width: calc(50% - 40px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product-card {
+      flex: 1 1 calc(100% - 40px); /* 1 card per row */
+      max-width: calc(100% - 40px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-card {
+      flex: 1 1 100%; /* Full width for very small screens */
+      max-width: 100%;
+    }
+  }

@@ -32,3 +32,54 @@
     color: #121212;
     margin-top: 5px;
 }
+
+/* Responsive Design for Layout */
+.top-seller-section {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+    justify-content: center; /* Center the cards */
+    gap: 20px; /* Spacing between cards */
+    padding: 10px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+    .home-card {
+        width: 220px; /* Slightly smaller cards for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .home-card {
+        width: 180px; /* Adjust card width for smaller tablets */
+    }
+
+    .home-card img {
+        width: 80px;
+        height: 120px; /* Reduce image size */
+    }
+
+    .top-product-name {
+        font-size: 1em; /* Adjust font size for smaller screens */
+    }
+
+    .top-price {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+
+    .home-card img {
+        width: 70px;
+        height: 100px; /* Further reduce image size */
+    }
+
+    .top-product-name {
+        font-size: 0.9em; /* Further adjust font size */
+    }
+
+    .top-price {
+        font-size: 0.8em; /* Further adjust font size */
+    }
+}

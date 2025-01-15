@@ -21,20 +21,37 @@
 
 .top-seller-section {
     max-width: 1500px;
-    margin: 0 auto;
-    /* Centers the cards */
+    margin: 0 auto; /* Centers the cards */
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    /* Spreads out the cards evenly */
-    gap: 20px;
-    /* Adds spacing between cards */
+    flex-wrap: wrap; /* Ensures the cards wrap to the next line */
+    justify-content: space-between; /* Spreads out the cards evenly */
+    gap: 20px; /* Adds spacing between cards */
 }
 
 .card {
-    flex: 1 1 calc(25% - 20px);
-    /* Ensures 4 cards fit in one row */
-    max-width: 350px;
-    /* Sets a maximum size for the card */
+    flex: 1 1 calc(25% - 20px); /* Ensures 4 cards fit in one row */
+    max-width: 350px; /* Sets a maximum size for the card */
     box-sizing: border-box;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .card {
+        flex: 1 1 calc(33.33% - 20px); /* 3 cards per row for tablet view */
+        max-width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per row for smaller tablets */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%; /* 1 card per row for mobile view */
+        max-width: 100%;
+    }
 }

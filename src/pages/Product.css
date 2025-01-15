@@ -11,6 +11,7 @@
 /* Centering Product List */
 .product-list {
   display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
   justify-content: center; /* Align cards horizontally */
   gap: 20px; /* Add spacing between cards */
   width: 100%; /* Ensure it uses the full width of the parent */
@@ -262,3 +263,4 @@
 body {
   background-color: #FCFCF3; /* Set a light background color */
 }
+
