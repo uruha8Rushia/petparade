@@ -10,6 +10,8 @@ const Home = () => {
     { src: "/promoted-acces.png", alt: "Hot Deals Pet Accessories" },
     { src: "/promoted-delivery.png", alt: "Delivery Information" },
   ];
+  
+  <HomeImageCarousel images={promoteImages} />
 
   const topSellerProducts = [
     {
@@ -24,12 +26,12 @@ const Home = () => {
     },
     {
       image: "/product3.png",
-      name: "toy",
+      name: "Toy",
       cost: "RM xx"
     },
     {
       image: "/product4.png",
-      name: "toy",
+      name: "Toy",
       cost: "RM xx"
     },
   ];
@@ -47,12 +49,12 @@ const Home = () => {
     },
     {
       image: "/product3.png",
-      name: "toy",
+      name: "Toy",
       cost: "RM xx"
     },
     {
       image: "/product4.png",
-      name: "toy",
+      name: "Toy",
       cost: "RM xx"
     },
   ];
@@ -70,32 +72,35 @@ const Home = () => {
     },
     {
       image: "/product3.png",
-      name: "toy",
+      name: "Toy",
       cost: "RM xx"
     },
     {
       image: "/product4.png",
-      name: "toy",
+      name: "Toy",
       cost: "RM xx"
     },
   ];
 
   return (
     <div className="home-page">
+      {/* Welcome Title Section */}
       <div className="title-container">
         <span className="line"></span>
         <span className="symbol">◊</span>
-        <h1 className="title">Welcome To Pet Parade !</h1>
+        <h1 className="title">Welcome To Pet Parade!</h1>
         <span className="symbol">◊</span>
         <span className="line"></span>
       </div>
 
+      {/* Banner with Image Carousel */}
       <div className="banner-section">
         <div className="banner-content">
           <HomeImageCarousel images={promoteImages} />
         </div>
       </div>
 
+      {/* Top Seller Products Section for Cat */}
       <div className="title-container">
         <span className="line"></span>
         <span className="symbol">◊</span>
@@ -123,6 +128,7 @@ const Home = () => {
         <button className="top-seller-button">View More</button>
       </a>
 
+      {/* Top Seller Products Section for Dog */}
       <div className="home-subtitle">
         <h2>Dog</h2>
       </div>
@@ -142,6 +148,7 @@ const Home = () => {
         <button className="top-seller-button">View More</button>
       </a>
 
+      {/* Top Seller Products Section for Small Pet */}
       <div className="home-subtitle">
         <h2>Small Pet</h2>
       </div>
@@ -160,7 +167,6 @@ const Home = () => {
       <a href="/Product">
         <button className="top-seller-button">View More</button>
       </a>
-
     </div>
   );
 };
