@@ -49,8 +49,10 @@
 
 /* Product Image Hover Effect */
 .product-card img {
-  width: 100%;
-  height: auto;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
+  object-fit: contain;
   border-radius: 10px;
   transition: transform 0.3s ease;
 }
@@ -159,8 +161,10 @@
 
 /* Product Image */
 .modal-product-image {
-  width: 80%;
-  height: auto;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
+  object-fit: contain;
   border-radius: 10px;
 }
 

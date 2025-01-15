@@ -2,21 +2,26 @@ import React, { useState } from 'react';
 import './Product.css';
 
 const catProducts = [
-  { id: 1, name: 'Cat Product 1', price: 'RM 44.85', description: 'Sterilised Cat Food', image: 'profile.png' },
-  { id: 2, name: 'Cat Product 2', price: 'RM 96.85', description: 'Fresh Market Cat Food', image: 'profile.png' },
-  { id: 3, name: 'Cat Product 3', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'profile.png' },
+  { id: 1, name: 'Cat Product 1', price: 'RM 44.85', description: 'Sterilised Cat Food', image: 'product1.jpg' },
+  { id: 2, name: 'Cat Product 2', price: 'RM 96.85', description: 'Fresh Market Cat Food', image: 'product1.jpg' },
+  { id: 3, name: 'Cat Product 3', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
+  { id: 4, name: 'Cat Product 4', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
 ];
 
 const dogProducts = [
-  { id: 1, name: 'Dog Product 1', price: 'RM 174.85', description: 'Senior Dog Food', image: 'profile.png' },
-  { id: 2, name: 'Dog Product 2', price: 'RM 161.85', description: 'Adult Dog Food', image: 'profile.png' },
-  { id: 3, name: 'Dog Product 3', price: 'RM 148.85', description: 'Junior Dog Food', image: 'profile.png' },
+  { id: 1, name: 'Dog Product 1', price: 'RM 174.85', description: 'Senior Dog Food', image: 'product1.jpg' },
+  { id: 2, name: 'Dog Product 2', price: 'RM 161.85', description: 'Adult Dog Food', image: 'product1.jpg' },
+  { id: 3, name: 'Dog Product 3', price: 'RM 148.85', description: 'Junior Dog Food', image: 'product1.jpg' },
+  { id: 4, name: 'Dog Product 4', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
 ];
 
 const smallPetProducts = [
-  { id: 1, name: 'Small Pet Product 1', price: 'RM 19.99', description: 'Healthy Small Pet Food', image: 'profile.png' },
-  { id: 2, name: 'Small Pet Product 2', price: 'RM 29.99', description: 'Balanced Diet for Small Pets', image: 'profile.png' },
+  { id: 1, name: 'Small Pet Product 1', price: 'RM 19.99', description: 'Healthy Small Pet Food', image: 'product1.jpg' },
+  { id: 2, name: 'Small Pet Product 2', price: 'RM 29.99', description: 'Balanced Diet for Small Pets', image: 'product1.jpg' },
+  { id: 3, name: 'Small Pet Product 3', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
+  { id: 4, name: 'Small Pet Product 4', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
 ];
+
 
 const ProductCard = ({ product, openModal, addToFavorites }) => {
   return (
