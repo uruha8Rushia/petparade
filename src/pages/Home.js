@@ -118,7 +118,10 @@ const Home = () => {
           />
         ))}
       </div>
-      <button className="top-seller-button">View More</button>
+
+      <a href="/Product">
+        <button className="top-seller-button">View More</button>
+      </a>
 
       <div className="home-subtitle">
         <h2>Dog</h2>
@@ -134,7 +137,10 @@ const Home = () => {
           />
         ))}
       </div>
-      <button className="top-seller-button">View More</button>
+
+      <a href="/Product">
+        <button className="top-seller-button">View More</button>
+      </a>
 
       <div className="home-subtitle">
         <h2>Small Pet</h2>
@@ -150,7 +156,11 @@ const Home = () => {
           />
         ))}
       </div>
-      <button className="top-seller-button">View More</button>
+
+      <a href="/Product">
+        <button className="top-seller-button">View More</button>
+      </a>
+
     </div>
   );
 };

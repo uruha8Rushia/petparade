@@ -144,9 +144,9 @@ const Product = () => {
       <ProductSection title="Cat Products" products={catProducts} openModal={openModal} addToFavorites={addToFavorites} />
       <ProductSection title="Dog Products" products={dogProducts} openModal={openModal} addToFavorites={addToFavorites} />
       <ProductSection title="Small Pet Products" products={smallPetProducts} openModal={openModal} addToFavorites={addToFavorites} />
-      
+
       {modalProduct && <Modal product={modalProduct} closeModal={closeModal} addToCart={addToCart} addToFavorites={addToFavorites} />}
-      
+
       <div className="cart">
         <h2>Your Cart</h2>
         <ul>
