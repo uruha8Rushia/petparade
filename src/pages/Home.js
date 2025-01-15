@@ -5,6 +5,7 @@ import HomeCard from '../component/HomeCard';
 
 const Home = () => {
   const promoteImages = [
+    { src: "/promoted-cover.png", alt: "Scroll Down For More Information" },
     { src: "/promoted-food.png", alt: "2024 Pet Food Best Seller" },
     { src: "/promoted-acces.png", alt: "Hot Deals Pet Accessories" },
     { src: "/promoted-delivery.png", alt: "Delivery Information" },
@@ -81,8 +82,12 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <div>
-        <h1>Welcome to the Home Page!</h1>
+      <div className="title-container">
+        <span className="line"></span>
+        <span className="symbol">◊</span>
+        <h1 className="title">Welcome To Pet Parade !</h1>
+        <span className="symbol">◊</span>
+        <span className="line"></span>
       </div>
 
       <div className="banner-section">
@@ -91,11 +96,15 @@ const Home = () => {
         </div>
       </div>
 
-      <div>
-        <h1>Top Seller Products</h1>
+      <div className="title-container">
+        <span className="line"></span>
+        <span className="symbol">◊</span>
+        <h1 className="title">Top Seller Products</h1>
+        <span className="symbol">◊</span>
+        <span className="line"></span>
       </div>
 
-      <div>
+      <div className="home-subtitle">
         <h2>Cat</h2>
       </div>
 
@@ -109,8 +118,9 @@ const Home = () => {
           />
         ))}
       </div>
+      <button className="top-seller-button">View More</button>
 
-      <div>
+      <div className="home-subtitle">
         <h2>Dog</h2>
       </div>
 
@@ -124,8 +134,9 @@ const Home = () => {
           />
         ))}
       </div>
+      <button className="top-seller-button">View More</button>
 
-      <div>
+      <div className="home-subtitle">
         <h2>Small Pet</h2>
       </div>
 
@@ -139,6 +150,7 @@ const Home = () => {
           />
         ))}
       </div>
+      <button className="top-seller-button">View More</button>
     </div>
   );
 };
