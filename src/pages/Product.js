@@ -29,7 +29,7 @@ const products = [
     name: 'Product 4',
     price: '$29.99',
     description: 'This is another great product.',
-    image: 'product2.jpg',
+    image: 'product2wou.jpg',
   },
   // Add more products as needed
 ];

@@ -1,1 +1,1 @@
-{"cibai":{"username":"cibai","password":"69","email":"jiongming04@student.usm.my"},"choo":{"username":"choo","password":"123456","email":"test@gmail.com"}}
+{"cibai":{"username":"cibai","password":"69","email":"jiongming04@student.usm.my","role":null},"choo":{"username":"choo","password":"123456","email":"test@gmail.com","role":null},"Admin":{"username":"Admin","password":"admin@123","email":null,"role":"admin"}}
