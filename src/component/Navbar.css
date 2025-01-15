@@ -223,7 +223,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1500px) {
+@media (max-width: 1200px) {
   .hamburger {
     display: block; /* Show the hamburger menu on smaller screens */
   }
