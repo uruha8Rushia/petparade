@@ -52,11 +52,15 @@
 
 .top-seller-section {
     max-width: 1500px;
-    margin: 0 auto; /* Centers the cards */
+    margin: 0 auto;
+    /* Centers the cards */
     display: flex;
-    flex-wrap: wrap; /* Ensures the cards wrap to the next line */
-    justify-content: space-between; /* Spreads out the cards evenly */
-    gap: 20px; /* Adds spacing between cards */
+    flex-wrap: wrap;
+    /* Ensures the cards wrap to the next line */
+    justify-content: space-between;
+    /* Spreads out the cards evenly */
+    gap: 20px;
+    /* Adds spacing between cards */
 }
 
 .home-subtitle h2 {
@@ -86,21 +90,48 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .card {
-        flex: 1 1 calc(33.33% - 20px); /* 3 cards per row for tablet view */
+        flex: 1 1 calc(33.33% - 20px);
+        /* 3 cards per row for tablet view */
         max-width: calc(33.33% - 20px);
+    }
+
+    .top-seller-button {
+        width: 100%;
+        /* Button spans across the width */
+        margin-left: 0;
+        /* Ensure no extra margin pushing the button off screen */
     }
 }
 
 @media (max-width: 768px) {
     .card {
-        flex: 1 1 calc(50% - 20px); /* 2 cards per row for smaller tablets */
+        flex: 1 1 calc(50% - 20px);
+        /* 2 cards per row for smaller tablets */
         max-width: calc(50% - 20px);
+    }
+
+    .top-seller-button {
+        width: 100%;
+        /* Button spans across the width */
+        margin-left: 0;
+        /* Ensure no extra margin pushing the button off screen */
     }
 }
 
 @media (max-width: 480px) {
     .card {
-        flex: 1 1 100%; /* 1 card per row for mobile view */
+        flex: 1 1 100%;
+        /* 1 card per row for mobile view */
         max-width: 100%;
     }
+
+    .top-seller-button {
+        font-size: 12px;
+        /* Even smaller font for very small screens */
+        width: 100%;
+        /* Button spans across the width */
+        margin-left: 0;
+        /* Ensure no extra margin pushing the button off screen */
+    }
+
 }

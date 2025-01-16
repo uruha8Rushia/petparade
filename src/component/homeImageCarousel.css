@@ -1,61 +1,125 @@
+/* Carousel Container */
 .carousel-container {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  width: 100%;
+  max-width: 1300px;
+  /* Adjust the width to your preference */
+  margin: auto;
+  overflow: hidden;
 }
 
-.carousel-container img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+/* Slider Wrapper */
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgb(234, 134, 104);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* Makes the button a circle */
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    z-index: 2;
+/* Slider */
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* Smooth transition between images */
 }
 
-.carousel-button.prev {
-    left: 0px;
+/* Slide */
+.slide {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  /* Prevents the slide from shrinking */
 }
 
-.carousel-button.next {
-    right: 0px;
+/* Image Style */
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* Ensures images cover the area properly */
 }
 
-.carousel-button:hover {
-    background-color: rgb(217, 104, 84);
+/* Navigation Buttons */
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  color: rgba(4, 4, 4, 0.437);
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 10;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.slider-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    margin-top: 10px;
+.slider-button-left {
+  left: 15px;
+}
+
+.slider-button-right {
+  right: 15px;
+}
+
+.slider-button:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dots Navigation */
+.slider-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background-color: #f0dcd3;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  width: 8px;
+  height: 8px;
+  background-color: #f0dcd3;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-.dot.active {
-    background-color: #efab78;
-    transform: scale(0.4);
-    padding: 6px;
+.dot.active-dot {
+  background-color: #efab78;
+}
+
+
+
+/* Apply animation to the active slide */
+.slider .slide {
+  animation: slideIn 0.5s forwards;
+  /* Animation for new slides */
+}
+
+/* For previously inactive slides */
+.slider .slide.prev {
+  animation: slideOut 0.5s forwards;
+  /* Slide out the previous slide */
+}
+
+/* Add animation when changing slides */
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
