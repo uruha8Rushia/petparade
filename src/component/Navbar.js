@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Modal from "./Modal";
+import { useCart } from "../CartContext"; // Import CartContext to use global cart state
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -8,30 +9,7 @@ const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [modalContent, setModalContent] = useState(""); // Modal content
 
-  // Predefined cart items
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Sample Product 1",
-      price: 25,
-      quantity: 2,
-      image: "/cart1.png",
-    },
-    {
-      id: 2,
-      name: "Sample Product 2",
-      price: 15,
-      quantity: 1,
-      image: "/cart2.png",
-    },
-    {
-      id: 3,
-      name: "Sample Product 3",
-      price: 10,
-      quantity: 3,
-      image: "/cart3.png",
-    },
-  ]);
+  const { cartItems, updateQuantity } = useCart(); // Access cart items and updateQuantity from CartContext
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
@@ -49,16 +27,6 @@ const Navbar = () => {
   const closeModal = () => {
     setIsModalOpen(false); // Close the modal
     setModalContent(""); // Clear the modal content
-  };
-
-  const updateQuantity = (id, change) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + change) }
-          : item
-      )
-    );
   };
 
   const handleLogout = () => {
@@ -104,11 +72,7 @@ const Navbar = () => {
         {/* Search Bar and Icons */}
         <div className="nav-tools">
           <form className="search-bar">
-            <input
-              type="text"
-              placeholder="Search"
-              className="search-input"
-            />
+            <input type="text" placeholder="Search" className="search-input" />
             <button type="submit" className="search-button">
               <i className="fas fa-search"></i>
             </button>
@@ -120,11 +84,9 @@ const Navbar = () => {
             >
               <i className="fas fa-heart"></i>
             </div>
-            <div
-              className="nav-icon"
-              onClick={() => openModal("Cart Items")}
-            >
+            <div className="nav-icon" onClick={() => openModal("Cart Items")}>
               <i className="fas fa-shopping-cart"></i>
+              <span className="cart-count">{cartItems.length}</span> {/* Dynamic cart count */}
             </div>
             <div
               className="nav-icon"
@@ -174,8 +136,8 @@ const Navbar = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         content={modalContent}
-        cartItems={cartItems} // Pass predefined cart items
-        updateQuantity={updateQuantity}
+        cartItems={cartItems} // Pass cart items from CartContext
+        updateQuantity={updateQuantity} // Pass updateQuantity function
         handleLogout={handleLogout}
       />
     </>

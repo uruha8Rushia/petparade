@@ -4,6 +4,18 @@ import "./Modal.css";
 const Modal = ({ isOpen, onClose, content, cartItems, updateQuantity, handleLogout }) => {
   if (!isOpen) return null;
 
+  // Function to handle decrementing quantity and prompting for removal
+  const handleDecrement = (id, quantity) => {
+    if (quantity === 1) {
+      const confirmRemoval = window.confirm("Do you want to remove this product from the cart?");
+      if (confirmRemoval) {
+        updateQuantity(id, -1); // Removes the item when quantity reaches 0
+      }
+    } else {
+      updateQuantity(id, -1);
+    }
+  };
+
   const renderContent = () => {
     switch (content) {
       case "Favorite Items":
@@ -18,18 +30,7 @@ const Modal = ({ isOpen, onClose, content, cartItems, updateQuantity, handleLogo
                 </tr>
               </thead>
               <tbody>
-                {[
-                  {
-                    id: 1,
-                    name: "Favorite Item 1",
-                    image: "/cart1.png", // Replace with your image path
-                  },
-                  {
-                    id: 2,
-                    name: "Favorite Item 2",
-                    image: "/cart2.png", // Replace with your image path
-                  },
-                ].map((item) => (
+                {[].map((item) => (
                   <tr key={item.id}>
                     <td>
                       <div className="favorite-item">
@@ -79,11 +80,11 @@ const Modal = ({ isOpen, onClose, content, cartItems, updateQuantity, handleLogo
                     </td>
                     <td>${item.price}</td>
                     <td>
-                      <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+                      <button onClick={() => handleDecrement(item.id, item.quantity)}>-</button>
                       <span>{item.quantity}</span>
                       <button onClick={() => updateQuantity(item.id, 1)}>+</button>
                     </td>
-                    <td>${item.price * item.quantity}</td>
+                    <td>${(item.price * item.quantity).toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -91,7 +92,7 @@ const Modal = ({ isOpen, onClose, content, cartItems, updateQuantity, handleLogo
             <div className="cart-summary">
               <span>
                 Subtotal: $
-                {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}
+                {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
               </span>
             </div>
           </>

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Product from "./pages/Product";
@@ -12,7 +12,8 @@ import LoginForm from "./pages/Login";
 import Signup from "./pages/Signup";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
-import BackendTest from "./pages/BackendTest"; 
+import BackendTest from "./pages/BackendTest";
+import { CartProvider } from "./CartContext"; // Import CartProvider
 
 function App() {
   const location = useLocation();
@@ -22,13 +23,9 @@ function App() {
     <div>
       {!hideNavbarFooter && <Navbar />}
       <Routes>
-        {/* Signup Page as default */}
         <Route path="/" element={<Signup />} />
-        {/* Login Page */}
         <Route path="/login" element={<LoginForm />} />
-        {/* Home Page */}
         <Route path="/home" element={<Home />} />
-        {/* Other routes */}
         <Route path="/about" element={<About />} />
         <Route path="/product" element={<Product />} />
         <Route path="/faq" element={<FAQ />} />
@@ -43,11 +40,14 @@ function App() {
   );
 }
 
+// Wrap the App component in CartProvider and Router
 function AppWrapper() {
   return (
-    <Router>
-      <App />
-    </Router>
+    <CartProvider>
+      <Router>
+        <App />
+      </Router>
+    </CartProvider>
   );
 }
 

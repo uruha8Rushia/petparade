@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Product.css';
+import { useCart } from '../CartContext'; // Import CartContext to use global cart state
 
 const ProductCard = ({ product, openModal, addToFavorites }) => {
   return (
@@ -32,9 +33,12 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
   };
 
   const handleAddToCart = () => {
-    addToCart(product, quantity);
+    addToCart(product, quantity); // Use global addToCart
+    console.log("Adding to cart:", product, quantity); // Debugging log
     closeModal();
   };
+
+  const totalPrice = (product.price * quantity).toFixed(2); // Calculate total price
 
   return (
     <div className="modal-overlay">
@@ -45,7 +49,7 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
         <img src={product.image} alt={product.name} className="modal-product-image" />
         <h2>{product.name}</h2>
         <p>{product.description}</p>
-        <p>Price: {product.price}</p>
+        <p>Price: RM {totalPrice}</p> {/* Dynamically updated price */}
 
         <div className="quantity-wrapper">
           <label htmlFor="quantity" className="quantity-label">
@@ -100,9 +104,9 @@ const ProductSection = ({ title, products, openModal, addToFavorites }) => {
 };
 
 const Product = () => {
+  const { addToCart } = useCart(); // Use global addToCart from CartContext
   const [products, setProducts] = useState([]); // Store all products
   const [modalProduct, setModalProduct] = useState(null);
-  const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true); // For loading state
   const [error, setError] = useState(null); // For error handling
@@ -133,10 +137,6 @@ const Product = () => {
 
   const closeModal = () => {
     setModalProduct(null);
-  };
-
-  const addToCart = (product, quantity) => {
-    setCart([...cart, { ...product, quantity }]);
   };
 
   const addToFavorites = (product) => {
@@ -184,7 +184,7 @@ const Product = () => {
         <Modal
           product={modalProduct}
           closeModal={closeModal}
-          addToCart={addToCart}
+          addToCart={addToCart} // Use global addToCart
           addToFavorites={addToFavorites}
         />
       )}
