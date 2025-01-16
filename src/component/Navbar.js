@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { useCart } from "../CartContext"; // Import CartContext to use global cart state
 import "./Navbar.css";
@@ -8,8 +8,42 @@ const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [modalContent, setModalContent] = useState(""); // Modal content
+  const [searchTerm, setSearchTerm] = useState(""); // Search term state
+  const [searchResults, setSearchResults] = useState([]); // Search results state
+  const [products, setProducts] = useState([]); // Store all products for search
 
   const { cartItems, updateQuantity } = useCart(); // Access cart items and updateQuantity from CartContext
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Fetch products from the backend for search functionality
+  useEffect(() => {
+    fetch("/api/products") // Replace with your backend endpoint
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error("Error fetching products:", error));
+  }, []);
+
+  // Handle search logic
+  useEffect(() => {
+    if (searchTerm) {
+      const results = products.filter((product) =>
+        product.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchTerm, products]);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleProductSelect = (product) => {
+    navigate("/product", { state: { product } }); // Navigate to product page and pass product data
+    setSearchTerm(""); // Clear search term
+    setSearchResults([]); // Clear search results
+  };
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
@@ -71,12 +105,34 @@ const Navbar = () => {
 
         {/* Search Bar and Icons */}
         <div className="nav-tools">
-          <form className="search-bar">
-            <input type="text" placeholder="Search" className="search-input" />
-            <button type="submit" className="search-button">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="search-input"
+            />
+            <button type="button" className="search-button">
               <i className="fas fa-search"></i>
             </button>
-          </form>
+
+            {/* Search Results */}
+            {searchResults.length > 0 && (
+              <div className="search-results">
+                {searchResults.map((product) => (
+                  <div
+                    key={product.id}
+                    className="search-result-item"
+                    onClick={() => handleProductSelect(product)}
+                  >
+                    {product.name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           <div className="nav-icons">
             <div
               className="nav-icon"

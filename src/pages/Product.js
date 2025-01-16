@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Product.css';
+import { useLocation } from "react-router-dom";
 import { useCart } from '../CartContext'; // Import CartContext to use global cart state
 
 const ProductCard = ({ product, openModal, addToFavorites }) => {
@@ -149,6 +150,16 @@ const Product = () => {
   const catProducts = products.filter((product) => product.category === 'cat');
   const dogProducts = products.filter((product) => product.category === 'dog');
   const smallPetProducts = products.filter((product) => product.category === 'small-pet');
+
+  const location = useLocation();
+  const { state } = location;
+  const preselectedProduct = state?.product; // Check if product was passed
+
+  useEffect(() => {
+    if (preselectedProduct) {
+      openModal(preselectedProduct); // Automatically open modal
+    }
+  }, [preselectedProduct]);
 
   return (
     <div className="product-page">

@@ -5,7 +5,7 @@
   align-items: center;
   padding: 10px 20px;
   position: relative;
-  background-image: "/profile-background.png" ;
+  background-image: "/profile-background.png";
   left: 10px;
 }
 
@@ -64,8 +64,8 @@
 }
 
 .nav-link.active {
-  color: #f4a261; /* Change this color for the active link */  }
-
+  color: #f4a261; /* Change this color for the active link */
+}
 
 /* Search Bar and Icons */
 .nav-tools {
@@ -113,6 +113,31 @@
   color: white;
 }
 
+/* Search Results Dropdown */
+.search-results {
+  position: absolute;
+  top: 50px; /* Position below the search bar */
+  left: 0;
+  width: 100%; /* Match the search bar width */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.search-result-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-result-item:hover {
+  background-color: #f4a261;
+  color: white;
+}
+
 .nav-icons {
   display: flex;
   gap: 20px;
@@ -134,7 +159,6 @@
   left: -2px;
 }
 
-/* Sidebar */
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -178,7 +202,6 @@
   cursor: pointer;
   margin-bottom: 20px;
 }
-
 
 /* Hamburger Menu */
 .hamburger {
@@ -252,4 +275,4 @@
     top: 6px;
     left: 0; /* Ensure icons are in view */
   }
-  }
+}
