@@ -33,7 +33,6 @@ function App() {
         <Route path="/payment-faq" element={<PaymentFAQ />} />
         <Route path="/delivery-faq" element={<DeliveryFAQ />} />
         <Route path="/returns-faq" element={<ReturnsFAQ />} />
-        <Route path="/backend-test" element={<BackendTest />} />
       </Routes>
       {!hideNavbarFooter && <Footer />}
     </div>

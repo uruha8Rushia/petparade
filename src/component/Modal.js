@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Modal.css";
 
-const Modal = ({ isOpen, onClose, content, cartItems, updateQuantity, handleLogout }) => {
+const Modal = ({ isOpen, onClose, content, handleLogout }) => {
+  const [cartItems, setCartItems] = useState([
+  ]);
+
+  const updateQuantity = (id, change) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + change) }
+          : item
+      )
+    );
+  };
+
   if (!isOpen) return null;
 
   // Function to handle decrementing quantity and prompting for removal
@@ -97,26 +110,28 @@ const Modal = ({ isOpen, onClose, content, cartItems, updateQuantity, handleLogo
             </div>
           </>
         );
+      case "Favorite Items":
+        return <h2>Your Favorites</h2>; // Add favorite items here.
       case "User Profile":
         return (
           <>
-            <h2>User Profile</h2>
-            <div className="user-profile">
-              <img src="/profile.png" alt="Profile" className="profile-picture" />
-              <div className="user-info">
-                <p><strong>Name:</strong> John Doe</p>
-                <p><strong>Email:</strong> john.doe@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Account Type:</strong> Premium</p>
-                <p><strong>Member Since:</strong> January 2021</p>
-              </div>
-              <div className="tab-buttons">
-                <button className="tab-button active">View Profile</button>
-                <button className="tab-button">View Order History</button>
-                <button className="tab-button" onClick={handleLogout}>Log out</button>
-              </div>
+          <h2>User Profile</h2>
+          <div className="user-profile">
+            <img src="/profile.png" alt="Profile" className="profile-picture" />
+            <div className="user-info">
+              <p><strong>Name:</strong> John Doe</p>
+              <p><strong>Email:</strong> john.doe@example.com</p>
+              <p><strong>Phone:</strong> +123 456 7890</p>
+              <p><strong>Account Type:</strong> Premium</p>
+              <p><strong>Member Since:</strong> January 2021</p>
             </div>
-          </>
+            <div className="tab-buttons">
+              <button className="tab-button active">View Profile</button>
+              <button className="tab-button">View Order History</button>
+              <button className="tab-button" onClick={handleLogout}>Log out</button>
+            </div>
+          </div>
+        </> // Add profile details here.
         );
       default:
         return null;
@@ -125,16 +140,7 @@ const Modal = ({ isOpen, onClose, content, cartItems, updateQuantity, handleLogo
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div
-        className={`modal-content ${
-          content === "Cart Items"
-            ? "cart-modal"
-            : content === "Favorite Items"
-            ? "favorites-modal"
-            : "user-profile-modal"
-        }`}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>
           &times;
         </button>
