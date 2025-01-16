@@ -10,12 +10,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserService {
     private static final String USER_FILE_PATH = "users.json";
-    private Map<String, User> users;
-    private ObjectMapper objectMapper;
+    private static final String ADMIN_USERNAME = "Admin";
+    private static final String ADMIN_PASSWORD = "admin@123";
+    private static final String ADMIN_ROLE = "admin";
+    private final Map<String, User> users;
+    private final ObjectMapper objectMapper;
 
     public UserService() {
         this.objectMapper = new ObjectMapper();
         this.users = loadUsers();
+        ensureAdminUser();
     }
 
     public boolean register(User user) {
@@ -27,9 +31,12 @@ public class UserService {
         return true;
     }
 
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         User user = users.get(username);
-        return user != null && user.getPassword().equals(password);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
     }
 
     private Map<String, User> loadUsers() {
@@ -41,7 +48,7 @@ public class UserService {
                 return new HashMap<>();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             return new HashMap<>();
         }
     }
@@ -50,7 +57,18 @@ public class UserService {
         try {
             objectMapper.writeValue(new File(USER_FILE_PATH), users);
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+        }
+    }
+
+    private void ensureAdminUser() {
+        if (!users.containsKey(ADMIN_USERNAME)) {
+            User admin = new User();
+            admin.setUsername(ADMIN_USERNAME);
+            admin.setPassword(ADMIN_PASSWORD);
+            admin.setRole(ADMIN_ROLE);
+            users.put(ADMIN_USERNAME, admin);
+            saveUsers();
         }
     }
 }
