@@ -109,7 +109,7 @@ const Product = () => {
 
   // Fetch products from the backend
   useEffect(() => {
-    fetch('http://localhost:8080/api/products') // Replace with your backend endpoint
+    fetch('/api/products') // Replace with your backend endpoint
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch products');
@@ -188,26 +188,6 @@ const Product = () => {
           addToFavorites={addToFavorites}
         />
       )}
-
-      <div className="cart">
-        <h2>Your Cart</h2>
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index}>
-              {item.name} - {item.quantity}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="favorites">
-        <h2>Your Favorites</h2>
-        <ul>
-          {favorites.map((item, index) => (
-            <li key={index}>{item.name}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };

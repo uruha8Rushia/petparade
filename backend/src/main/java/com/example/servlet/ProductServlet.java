@@ -29,15 +29,22 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Set response content type
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-
-        // Convert product list to JSON
-        Gson gson = new Gson();
-        String jsonResponse = gson.toJson(productList);
-
-        // Write JSON response
-        resp.getWriter().write(jsonResponse);
+        try {
+            // Set response content type
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+    
+            // Convert product list to JSON
+            Gson gson = new Gson();
+            String jsonResponse = gson.toJson(productList);
+    
+            // Write JSON response
+            resp.getWriter().write(jsonResponse);
+        } catch (Exception e) {
+            // Log the error
+            e.printStackTrace();
+            // Send error response
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to load products");
+        }
     }
 }
