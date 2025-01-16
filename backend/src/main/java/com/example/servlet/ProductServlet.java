@@ -22,9 +22,19 @@ public class ProductServlet extends HttpServlet {
         // Initialize product list
         productList = new ArrayList<>();
         productList.add(new Product(1, "Cat Product 1", 44.85, "Sterilised Cat Food", "product1.jpg", "cat"));
-        productList.add(new Product(2, "Dog Product 1", 161.85, "Adult Dog Food", "product2.jpg", "dog"));
-        productList.add(new Product(3, "Small Pet Product 1", 19.99, "Healthy Small Pet Food", "product3.jpg", "small-pet"));
-        productList.add(new Product(4, "Cat Product 2", 96.85, "Fresh Market Cat Food", "product4.jpg", "cat"));
+        productList.add(new Product(2, "Cat Product 2", 96.85, "Fresh Market Cat Food", "product1.jpg", "cat"));
+        productList.add(new Product(3, "Cat Product 3", 38.35, "Poppy Cat Food", "product1.jpg", "cat"));
+        productList.add(new Product(4, "Cat Product 4", 38.35, "Poppy Cat Food", "product1.jpg", "cat"));
+
+        productList.add(new Product(5, "Dog Product 1", 174.85, "Senior Dog Food", "product1.jpg", "dog"));
+        productList.add(new Product(6, "Dog Product 2", 161.85, "Adult Dog Food", "product1.jpg", "dog"));
+        productList.add(new Product(7, "Dog Product 3", 148.85, "Junior Dog Food", "product1.jpg", "dog"));
+        productList.add(new Product(8, "Dog Product 4", 38.35, "Poppy Cat Food", "product1.jpg", "dog"));
+
+        productList.add(new Product(9, "Small Pet Product 1", 19.99, "Healthy Small Pet Food", "product1.jpg", "small-pet"));
+        productList.add(new Product(10, "Small Pet Product 2", 29.99, "Balanced Diet for Small Pets", "product1.jpg", "small-pet"));
+        productList.add(new Product(11, "Small Pet Product 3", 38.35, "Poppy Cat Food", "product1.jpg", "small-pet"));
+        productList.add(new Product(12, "Small Pet Product 4", 38.35, "Poppy Cat Food", "product1.jpg", "small-pet"));
     }
 
     @Override
