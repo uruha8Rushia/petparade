@@ -12,7 +12,6 @@ import LoginForm from "./pages/Login";
 import Signup from "./pages/Signup";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
-import BackendTest from "./pages/BackendTest"; 
 
 function App() {
   const location = useLocation();
@@ -36,7 +35,6 @@ function App() {
         <Route path="/payment-faq" element={<PaymentFAQ />} />
         <Route path="/delivery-faq" element={<DeliveryFAQ />} />
         <Route path="/returns-faq" element={<ReturnsFAQ />} />
-        <Route path="/backend-test" element={<BackendTest />} />
       </Routes>
       {!hideNavbarFooter && <Footer />}
     </div>
