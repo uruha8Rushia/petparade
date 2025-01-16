@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
-import { useCart } from "../CartContext"; // Import CartContext to use global cart state
+import { useCart } from "../CartContext";
+import { useFavourites } from "../Favourite";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [modalContent, setModalContent] = useState(""); // Modal content
+  const [selectedProduct, setSelectedProduct] = useState(null); // Track selected product
   const [searchTerm, setSearchTerm] = useState(""); // Search term state
   const [searchResults, setSearchResults] = useState([]); // Search results state
   const [products, setProducts] = useState([]); // Store all products for search
 
-  const { cartItems, updateQuantity } = useCart(); // Access cart items and updateQuantity from CartContext
+  const { cartItems } = useCart(); // Access cart items from CartContext
+  const { favourites, toggleFavourite } = useFavourites(); // Access favourites and toggle function
   const navigate = useNavigate(); // Hook for navigation
 
   // Fetch products from the backend for search functionality
@@ -53,14 +56,16 @@ const Navbar = () => {
     setIsSidebarOpen(false); // Close the sidebar
   };
 
-  const openModal = (content) => {
+  const openModal = (content, product = null) => {
     setModalContent(content); // Set the modal content dynamically
+    setSelectedProduct(product); // Set the selected product if provided
     setIsModalOpen(true); // Open the modal
   };
 
   const closeModal = () => {
     setIsModalOpen(false); // Close the modal
     setModalContent(""); // Clear the modal content
+    setSelectedProduct(null); // Clear the selected product
   };
 
   const handleLogout = () => {
@@ -140,9 +145,12 @@ const Navbar = () => {
             >
               <i className="fas fa-heart"></i>
             </div>
-            <div className="nav-icon" onClick={() => openModal("Cart Items")}>
+            <div
+              className="nav-icon"
+              onClick={() => openModal("Cart Items")}
+            >
               <i className="fas fa-shopping-cart"></i>
-              <span className="cart-count">{cartItems.length}</span> {/* Dynamic cart count */}
+              <span className="cart-count">{cartItems.length}</span>
             </div>
             <div
               className="nav-icon"
@@ -192,9 +200,9 @@ const Navbar = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         content={modalContent}
-        cartItems={cartItems} // Pass cart items from CartContext
-        updateQuantity={updateQuantity} // Pass updateQuantity function
+        selectedProduct={selectedProduct}
         handleLogout={handleLogout}
+        openModal={openModal}
       />
     </>
   );

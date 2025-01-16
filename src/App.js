@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
 import { CartProvider } from "./CartContext"; // Import CartProvider
+import { FavouriteProvider } from "./Favourite";
 
 function App() {
   const location = useLocation();
@@ -43,11 +44,13 @@ function App() {
 // Wrap the App component in CartProvider and Router for context and routing
 function AppWrapper() {
   return (
+    <FavouriteProvider>
     <CartProvider>
       <Router>
         <App />
       </Router>
     </CartProvider>
+    </FavouriteProvider>
   );
 }
 

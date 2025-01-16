@@ -1,9 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import './Product.css';
+import React, { useState, useEffect } from "react";
+import "./Product.css";
 import { useLocation } from "react-router-dom";
-import { useCart } from '../CartContext'; // Import CartContext to use global cart state
+import { useCart } from "../CartContext"; // Import CartContext to use global cart state
+import { useFavourites } from "../Favourite";
 
-const ProductCard = ({ product, openModal, addToFavorites }) => {
+const ProductCard = ({ product, openModal }) => {
+  const { favourites, addToFavourites, removeFromFavourites } = useFavourites(); // Use global favorites context
+  const [statusMessage, setStatusMessage] = useState(""); // State to track status message
+  const isFavorited = favourites.some((item) => item.id === product.id); // Check if product is favorited
+
+  const handleFavoriteClick = () => {
+    if (isFavorited) {
+      removeFromFavourites(product.id);
+      setStatusMessage(`Removed ${product.name} from favorites`);
+    } else {
+      addToFavourites(product);
+      setStatusMessage(`Added ${product.name} to favorites`);
+    }
+
+    // Clear the status message after 3 seconds
+    setTimeout(() => setStatusMessage(""), 3000);
+  };
+
   return (
     <div className="product-card">
       <img src={product.image} alt={product.name} className="product-image" />
@@ -14,28 +32,33 @@ const ProductCard = ({ product, openModal, addToFavorites }) => {
         <button className="add-to-cart" onClick={() => openModal(product)}>
           Add to Cart
         </button>
-        <div className="love-btn" onClick={() => addToFavorites(product)}>
+        <div
+          className="love-btn"
+          onClick={handleFavoriteClick}
+          style={{ color: isFavorited ? "red" : "black" }}
+        >
           <i className="fas fa-heart"></i>
         </div>
       </div>
+      {/* Display status message */}
+      {statusMessage && <p className="status-message">{statusMessage}</p>}
     </div>
   );
 };
 
-const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
+const Modal = ({ product, closeModal, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (action) => {
     setQuantity((prevQuantity) => {
-      if (action === 'increment') return prevQuantity + 1;
-      if (action === 'decrement' && prevQuantity > 1) return prevQuantity - 1;
+      if (action === "increment") return prevQuantity + 1;
+      if (action === "decrement" && prevQuantity > 1) return prevQuantity - 1;
       return prevQuantity;
     });
   };
 
   const handleAddToCart = () => {
     addToCart(product, quantity); // Use global addToCart
-    console.log("Adding to cart:", product, quantity); // Debugging log
     closeModal();
   };
 
@@ -57,7 +80,10 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
             Quantity:
           </label>
           <div className="quantity-control">
-            <button className="quantity-btn" onClick={() => handleQuantityChange('decrement')}>
+            <button
+              className="quantity-btn"
+              onClick={() => handleQuantityChange("decrement")}
+            >
               −
             </button>
             <input
@@ -67,7 +93,10 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
               value={quantity}
               readOnly
             />
-            <button className="quantity-btn" onClick={() => handleQuantityChange('increment')}>
+            <button
+              className="quantity-btn"
+              onClick={() => handleQuantityChange("increment")}
+            >
               +
             </button>
           </div>
@@ -77,27 +106,19 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
           <button className="add-to-cart" onClick={handleAddToCart}>
             Add to Cart
           </button>
-          <div className="love-btn" onClick={() => addToFavorites(product)}>
-            <i className="fas fa-heart"></i>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const ProductSection = ({ title, products, openModal, addToFavorites }) => {
+const ProductSection = ({ title, products, openModal }) => {
   return (
     <div className="product-section">
       <h2>{title}</h2>
       <div className="product-list">
         {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            openModal={openModal}
-            addToFavorites={addToFavorites}
-          />
+          <ProductCard key={product.id} product={product} openModal={openModal} />
         ))}
       </div>
     </div>
@@ -108,16 +129,16 @@ const Product = () => {
   const { addToCart } = useCart(); // Use global addToCart from CartContext
   const [products, setProducts] = useState([]); // Store all products
   const [modalProduct, setModalProduct] = useState(null);
-  const [favorites, setFavorites] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal state
   const [loading, setLoading] = useState(true); // For loading state
   const [error, setError] = useState(null); // For error handling
 
   // Fetch products from the backend
   useEffect(() => {
-    fetch('/api/products') // Replace with your backend endpoint
+    fetch("/api/products") // Replace with your backend endpoint
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Failed to fetch products');
+          throw new Error("Failed to fetch products");
         }
         return response.json();
       })
@@ -126,30 +147,28 @@ const Product = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching products:', error);
-        setError('Failed to load products. Please try again later.');
+        console.error("Error fetching products:", error);
+        setError("Failed to load products. Please try again later.");
         setLoading(false);
       });
   }, []);
 
   const openModal = (product) => {
     setModalProduct(product);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setModalProduct(null);
-  };
-
-  const addToFavorites = (product) => {
-    if (!favorites.find((item) => item.id === product.id)) {
-      setFavorites([...favorites, product]);
-    }
+    setIsModalOpen(false);
   };
 
   // Categorize products by category (if backend provides a category field)
-  const catProducts = products.filter((product) => product.category === 'cat');
-  const dogProducts = products.filter((product) => product.category === 'dog');
-  const smallPetProducts = products.filter((product) => product.category === 'small-pet');
+  const catProducts = products.filter((product) => product.category === "cat");
+  const dogProducts = products.filter((product) => product.category === "dog");
+  const smallPetProducts = products.filter(
+    (product) => product.category === "small-pet"
+  );
 
   const location = useLocation();
   const { state } = location;
@@ -170,33 +189,21 @@ const Product = () => {
 
       {!loading && !error && (
         <>
-          <ProductSection
-            title="Cat Products"
-            products={catProducts}
-            openModal={openModal}
-            addToFavorites={addToFavorites}
-          />
-          <ProductSection
-            title="Dog Products"
-            products={dogProducts}
-            openModal={openModal}
-            addToFavorites={addToFavorites}
-          />
+          <ProductSection title="Cat Products" products={catProducts} openModal={openModal} />
+          <ProductSection title="Dog Products" products={dogProducts} openModal={openModal} />
           <ProductSection
             title="Small Pet Products"
             products={smallPetProducts}
             openModal={openModal}
-            addToFavorites={addToFavorites}
           />
         </>
       )}
 
-      {modalProduct && (
+      {isModalOpen && modalProduct && (
         <Modal
           product={modalProduct}
           closeModal={closeModal}
-          addToCart={addToCart} // Use global addToCart
-          addToFavorites={addToFavorites}
+          addToCart={addToCart}
         />
       )}
     </div>

@@ -1,18 +1,21 @@
 import React from "react";
 import "./Modal.css";
-import { useCart } from "../CartContext"; // Import global cart context
+import { useCart } from "../CartContext";
+import { useFavourites } from "../Favourite";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Modal = ({ isOpen, onClose, content, handleLogout }) => {
-  const { cartItems, updateQuantity } = useCart(); // Use global cart state and methods
+  const { cartItems, updateQuantity } = useCart();
+  const { favourites, removeFromFavourites } = useFavourites();
+  const navigate = useNavigate(); // Initialize navigate
 
   if (!isOpen) return null;
 
-  // Function to handle decrementing quantity and prompting for removal
   const handleDecrement = (id, quantity) => {
     if (quantity === 1) {
       const confirmRemoval = window.confirm("Do you want to remove this product from the cart?");
       if (confirmRemoval) {
-        updateQuantity(id, -1); // Removes the item when quantity reaches 0
+        updateQuantity(id, -1);
       }
     } else {
       updateQuantity(id, -1);
@@ -33,19 +36,7 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
                 </tr>
               </thead>
               <tbody>
-                {/* Sample favorite items, replace with actual data */}
-                {[
-                  {
-                    id: 1,
-                    name: "Favorite Item 1",
-                    image: "/cart1.png", // Replace with your image path
-                  },
-                  {
-                    id: 2,
-                    name: "Favorite Item 2",
-                    image: "/cart2.png", // Replace with your image path
-                  },
-                ].map((item) => (
+                {favourites.map((item) => (
                   <tr key={item.id}>
                     <td>
                       <div className="favorite-item">
@@ -59,10 +50,19 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
                     </td>
                     <td>
                       <button
-                        className="add-to-cart-button"
-                        onClick={() => console.log(`Add ${item.name} to cart`)}
+                        className="view-product-button"
+                        onClick={() => {
+                          onClose(); // Close the favorites modal
+                          navigate("/product", { state: { product: item } }); // Navigate to product page
+                        }}
                       >
-                        Add to Cart
+                        View Product
+                      </button>
+                      <button
+                        className="unfavourite-button"
+                        onClick={() => removeFromFavourites(item.id)}
+                      >
+                        Unfavourite
                       </button>
                     </td>
                   </tr>
