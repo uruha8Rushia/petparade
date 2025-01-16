@@ -1,27 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Product.css';
-
-const catProducts = [
-  { id: 1, name: 'Cat Product 1', price: 'RM 44.85', description: 'Sterilised Cat Food', image: 'product1.jpg' },
-  { id: 2, name: 'Cat Product 2', price: 'RM 96.85', description: 'Fresh Market Cat Food', image: 'product1.jpg' },
-  { id: 3, name: 'Cat Product 3', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
-  { id: 4, name: 'Cat Product 4', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
-];
-
-const dogProducts = [
-  { id: 1, name: 'Dog Product 1', price: 'RM 174.85', description: 'Senior Dog Food', image: 'product1.jpg' },
-  { id: 2, name: 'Dog Product 2', price: 'RM 161.85', description: 'Adult Dog Food', image: 'product1.jpg' },
-  { id: 3, name: 'Dog Product 3', price: 'RM 148.85', description: 'Junior Dog Food', image: 'product1.jpg' },
-  { id: 4, name: 'Dog Product 4', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
-];
-
-const smallPetProducts = [
-  { id: 1, name: 'Small Pet Product 1', price: 'RM 19.99', description: 'Healthy Small Pet Food', image: 'product1.jpg' },
-  { id: 2, name: 'Small Pet Product 2', price: 'RM 29.99', description: 'Balanced Diet for Small Pets', image: 'product1.jpg' },
-  { id: 3, name: 'Small Pet Product 3', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
-  { id: 4, name: 'Small Pet Product 4', price: 'RM 38.35', description: 'Poppy Cat Food', image: 'product1.jpg' },
-];
-
 
 const ProductCard = ({ product, openModal, addToFavorites }) => {
   return (
@@ -46,7 +24,7 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (action) => {
-    setQuantity(prevQuantity => {
+    setQuantity((prevQuantity) => {
       if (action === 'increment') return prevQuantity + 1;
       if (action === 'decrement' && prevQuantity > 1) return prevQuantity - 1;
       return prevQuantity;
@@ -70,7 +48,9 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
         <p>Price: {product.price}</p>
 
         <div className="quantity-wrapper">
-          <label htmlFor="quantity" className="quantity-label">Quantity:</label>
+          <label htmlFor="quantity" className="quantity-label">
+            Quantity:
+          </label>
           <div className="quantity-control">
             <button className="quantity-btn" onClick={() => handleQuantityChange('decrement')}>
               −
@@ -87,7 +67,6 @@ const Modal = ({ product, closeModal, addToCart, addToFavorites }) => {
             </button>
           </div>
         </div>
-
 
         <div className="button-container">
           <button className="add-to-cart" onClick={handleAddToCart}>
@@ -108,7 +87,12 @@ const ProductSection = ({ title, products, openModal, addToFavorites }) => {
       <h2>{title}</h2>
       <div className="product-list">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} openModal={openModal} addToFavorites={addToFavorites} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            openModal={openModal}
+            addToFavorites={addToFavorites}
+          />
         ))}
       </div>
     </div>
@@ -116,9 +100,32 @@ const ProductSection = ({ title, products, openModal, addToFavorites }) => {
 };
 
 const Product = () => {
+  const [products, setProducts] = useState([]); // Store all products
   const [modalProduct, setModalProduct] = useState(null);
   const [cart, setCart] = useState([]);
-  const [favorites, setFavorites] = useState([]); // State to track favorites
+  const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true); // For loading state
+  const [error, setError] = useState(null); // For error handling
+
+  // Fetch products from the backend
+  useEffect(() => {
+    fetch('http://localhost:8080/api/products') // Replace with your backend endpoint
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching products:', error);
+        setError('Failed to load products. Please try again later.');
+        setLoading(false);
+      });
+  }, []);
 
   const openModal = (product) => {
     setModalProduct(product);
@@ -133,25 +140,62 @@ const Product = () => {
   };
 
   const addToFavorites = (product) => {
-    if (!favorites.find(item => item.id === product.id)) {
+    if (!favorites.find((item) => item.id === product.id)) {
       setFavorites([...favorites, product]);
     }
   };
 
+  // Categorize products by category (if backend provides a `category` field)
+  const catProducts = products.filter((product) => product.category === 'cat');
+  const dogProducts = products.filter((product) => product.category === 'dog');
+  const smallPetProducts = products.filter((product) => product.category === 'small-pet');
+
   return (
     <div className="product-page">
       <h1>Our Products</h1>
-      <ProductSection title="Cat Products" products={catProducts} openModal={openModal} addToFavorites={addToFavorites} />
-      <ProductSection title="Dog Products" products={dogProducts} openModal={openModal} addToFavorites={addToFavorites} />
-      <ProductSection title="Small Pet Products" products={smallPetProducts} openModal={openModal} addToFavorites={addToFavorites} />
-      
-      {modalProduct && <Modal product={modalProduct} closeModal={closeModal} addToCart={addToCart} addToFavorites={addToFavorites} />}
-      
+
+      {loading && <p>Loading products...</p>}
+      {error && <p>{error}</p>}
+
+      {!loading && !error && (
+        <>
+          <ProductSection
+            title="Cat Products"
+            products={catProducts}
+            openModal={openModal}
+            addToFavorites={addToFavorites}
+          />
+          <ProductSection
+            title="Dog Products"
+            products={dogProducts}
+            openModal={openModal}
+            addToFavorites={addToFavorites}
+          />
+          <ProductSection
+            title="Small Pet Products"
+            products={smallPetProducts}
+            openModal={openModal}
+            addToFavorites={addToFavorites}
+          />
+        </>
+      )}
+
+      {modalProduct && (
+        <Modal
+          product={modalProduct}
+          closeModal={closeModal}
+          addToCart={addToCart}
+          addToFavorites={addToFavorites}
+        />
+      )}
+
       <div className="cart">
         <h2>Your Cart</h2>
         <ul>
           {cart.map((item, index) => (
-            <li key={index}>{item.name} - {item.quantity}</li>
+            <li key={index}>
+              {item.name} - {item.quantity}
+            </li>
           ))}
         </ul>
       </div>

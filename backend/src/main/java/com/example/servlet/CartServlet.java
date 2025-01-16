@@ -22,7 +22,7 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String productId = req.getParameter("productId");
+        int productId = Integer.parseInt(req.getParameter("productId"));
         String productName = req.getParameter("productName");
         String productDescription = req.getParameter("productDescription");
         double productPrice = Double.parseDouble(req.getParameter("productPrice"));
@@ -42,7 +42,7 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String productId = req.getParameter("productId");
+        int productId = Integer.parseInt(req.getParameter("productId"));
 
         Product product = new Product();
         product.setId(productId);

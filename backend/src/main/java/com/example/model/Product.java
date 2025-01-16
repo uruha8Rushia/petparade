@@ -1,17 +1,32 @@
 package com.example.model;
 
 public class Product {
-    private String id;
+    private int id;
     private String name;
-    private String description;
     private double price;
+    private String description;
+    private String image;
+    private String category;
 
-    // Getters and setters
-    public String getId() {
+    public Product(int id, String name, double price, String description, String image, String category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+        this.category = category;
+    }
+
+    public Product() {
+        //TODO Auto-generated constructor stub
+    }
+
+    // Getters and Setters
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -23,6 +38,14 @@ public class Product {
         this.name = name;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -31,11 +54,19 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
-        return price;
+    public String getImage() {
+        return image;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
