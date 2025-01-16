@@ -1,19 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Modal.css";
+import { useCart } from "../CartContext"; // Import global cart context
 
 const Modal = ({ isOpen, onClose, content, handleLogout }) => {
-  const [cartItems, setCartItems] = useState([
-  ]);
-
-  const updateQuantity = (id, change) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + change) }
-          : item
-      )
-    );
-  };
+  const { cartItems, updateQuantity } = useCart(); // Use global cart state and methods
 
   if (!isOpen) return null;
 
@@ -43,7 +33,19 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
                 </tr>
               </thead>
               <tbody>
-                {[].map((item) => (
+                {/* Sample favorite items, replace with actual data */}
+                {[
+                  {
+                    id: 1,
+                    name: "Favorite Item 1",
+                    image: "/cart1.png", // Replace with your image path
+                  },
+                  {
+                    id: 2,
+                    name: "Favorite Item 2",
+                    image: "/cart2.png", // Replace with your image path
+                  },
+                ].map((item) => (
                   <tr key={item.id}>
                     <td>
                       <div className="favorite-item">
@@ -110,28 +112,26 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
             </div>
           </>
         );
-      case "Favorite Items":
-        return <h2>Your Favorites</h2>; // Add favorite items here.
       case "User Profile":
         return (
           <>
-          <h2>User Profile</h2>
-          <div className="user-profile">
-            <img src="/profile.png" alt="Profile" className="profile-picture" />
-            <div className="user-info">
-              <p><strong>Name:</strong> John Doe</p>
-              <p><strong>Email:</strong> john.doe@example.com</p>
-              <p><strong>Phone:</strong> +123 456 7890</p>
-              <p><strong>Account Type:</strong> Premium</p>
-              <p><strong>Member Since:</strong> January 2021</p>
+            <h2>User Profile</h2>
+            <div className="user-profile">
+              <img src="/profile.png" alt="Profile" className="profile-picture" />
+              <div className="user-info">
+                <p><strong>Name:</strong> John Doe</p>
+                <p><strong>Email:</strong> john.doe@example.com</p>
+                <p><strong>Phone:</strong> +123 456 7890</p>
+                <p><strong>Account Type:</strong> Premium</p>
+                <p><strong>Member Since:</strong> January 2021</p>
+              </div>
+              <div className="tab-buttons">
+                <button className="tab-button active">View Profile</button>
+                <button className="tab-button">View Order History</button>
+                <button className="tab-button" onClick={handleLogout}>Log out</button>
+              </div>
             </div>
-            <div className="tab-buttons">
-              <button className="tab-button active">View Profile</button>
-              <button className="tab-button">View Order History</button>
-              <button className="tab-button" onClick={handleLogout}>Log out</button>
-            </div>
-          </div>
-        </> // Add profile details here.
+          </>
         );
       default:
         return null;

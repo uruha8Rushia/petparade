@@ -29,7 +29,7 @@ public class ProductService {
     }
 
     public void removeProduct(String productId) {
-        products.removeIf(product -> product.getId().equals(productId));
+        products.removeIf(product -> product.getId() == Integer.parseInt(productId));
         saveProducts();
     }
 

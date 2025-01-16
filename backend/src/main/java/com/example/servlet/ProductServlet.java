@@ -33,17 +33,16 @@ public class ProductServlet extends HttpServlet {
             // Set response content type
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
-    
-            // Convert product list to JSON
+
+            // Convert product list to JSON using Gson
             Gson gson = new Gson();
             String jsonResponse = gson.toJson(productList);
-    
+
             // Write JSON response
             resp.getWriter().write(jsonResponse);
         } catch (Exception e) {
-            // Log the error
+            // Log the error and send appropriate response
             e.printStackTrace();
-            // Send error response
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to load products");
         }
     }

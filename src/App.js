@@ -12,7 +12,6 @@ import LoginForm from "./pages/Login";
 import Signup from "./pages/Signup";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
-import BackendTest from "./pages/BackendTest";
 import { CartProvider } from "./CartContext"; // Import CartProvider
 
 function App() {
@@ -21,6 +20,7 @@ function App() {
 
   return (
     <div>
+      {/* Conditionally render the Navbar */}
       {!hideNavbarFooter && <Navbar />}
       <Routes>
         <Route path="/" element={<Signup />} />
@@ -34,12 +34,13 @@ function App() {
         <Route path="/delivery-faq" element={<DeliveryFAQ />} />
         <Route path="/returns-faq" element={<ReturnsFAQ />} />
       </Routes>
+      {/* Conditionally render the Footer */}
       {!hideNavbarFooter && <Footer />}
     </div>
   );
 }
 
-// Wrap the App component in CartProvider and Router
+// Wrap the App component in CartProvider and Router for context and routing
 function AppWrapper() {
   return (
     <CartProvider>

@@ -8,6 +8,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = (product, quantity) => {
     console.log("Adding to cart:", product, quantity); // Debugging
     const existingItem = cartItems.find((item) => item.id === product.id);
+
     if (existingItem) {
       setCartItems(
         cartItems.map((item) =>
@@ -21,18 +22,14 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Updated Update Quantity Function
+  // Update quantity and prompt to remove if quantity is 1
   const updateQuantity = (id, change) => {
     setCartItems((prevItems) =>
       prevItems
         .map((item) => {
           if (item.id === id) {
-            // If the quantity is 1 and the user clicks decrease
             if (item.quantity === 1 && change === -1) {
-              if (window.confirm("Do you want to remove this item from the cart?")) {
-                return null; // Remove the item
-              }
-              return item; // Keep the item if the user cancels
+              return null; // Remove the item
             }
             return { ...item, quantity: item.quantity + change };
           }

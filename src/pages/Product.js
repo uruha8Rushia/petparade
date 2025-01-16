@@ -145,7 +145,7 @@ const Product = () => {
     }
   };
 
-  // Categorize products by category (if backend provides a `category` field)
+  // Categorize products by category (if backend provides a category field)
   const catProducts = products.filter((product) => product.category === 'cat');
   const dogProducts = products.filter((product) => product.category === 'dog');
   const smallPetProducts = products.filter((product) => product.category === 'small-pet');
