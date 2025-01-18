@@ -33,9 +33,8 @@ const ProductCard = ({ product, openModal }) => {
           Add to Cart
         </button>
         <div
-          className="love-btn"
+          className={`love-btn ${isFavorited ? "favorited" : ""}`}
           onClick={handleFavoriteClick}
-          style={{ color: isFavorited ? "red" : "black" }}
         >
           <i className="fas fa-heart"></i>
         </div>

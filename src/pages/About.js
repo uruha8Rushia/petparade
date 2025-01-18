@@ -73,11 +73,11 @@ const AboutUs = () => {
           </p>
           <div class="team-grid">
             <div class="team-card">
-              <img src="/worker1.jpg" alt="Worker 1" class="team-image" />
+              <img src="/midnight.jpg" alt="Worker 1" class="team-image" />
               <h3 class="team-name">Jun Hao</h3>
               <p class="team-role">Front-End Developer</p>
               <p class="team-bio">
-                John brings the user interface to life with seamless designs and interactive elements.
+                Hola, I brings the user interface to life with seamless designs and interactive elements, hope you enjoy it!
               </p>
             </div>
             <div class="team-card">
