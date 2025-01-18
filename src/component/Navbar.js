@@ -6,26 +6,16 @@ import { useFavourites } from "../Favourite";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [userProfile, setUserProfile] = useState(null); // Add userProfile state
+  const [userProfile, setUserProfile] = useState(null);
 
   const { cartItems } = useCart();
   const { favourites, setFavourites } = useFavourites();
   const navigate = useNavigate();
-
-  // Fetch products for search functionality
-  useEffect(() => {
-    fetch("/api/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error("Error fetching products:", error));
-  }, []);
 
   // Fetch favourites for the logged-in user
   useEffect(() => {
@@ -56,12 +46,16 @@ const Navbar = () => {
   const fetchUserProfile = async () => {
     const username = localStorage.getItem("username");
     if (!username) return;
-
+  
     try {
-      const response = await fetch(`/api/user/profile?username=${username}`);
+      const response = await fetch(`/api/user?username=${username}`);
       if (response.ok) {
         const data = await response.json();
-        setUserProfile(data); // Set user profile state
+        setUserProfile({
+          name: data.username || "Unknown",
+          email: data.email || "Unknown",
+          profilePicture: data.profilePicture || "/default-profile.png",
+        }); // Set user profile state
       } else {
         console.error("Failed to fetch user profile");
       }
@@ -69,8 +63,8 @@ const Navbar = () => {
       console.error("Error fetching user profile:", error);
     }
   };
+  
 
-  // Open modal and fetch profile if it's for User Profile
   const openModal = (content, product = null) => {
     setModalContent(content);
     setSelectedProduct(product);
@@ -95,11 +89,10 @@ const Navbar = () => {
     console.log("User logged out");
   };
 
-  // Define handleProductSelect
   const handleProductSelect = (product) => {
     navigate("/product", { state: { product } });
-    setSearchTerm(""); // Clear the search input
-    setSearchResults([]); // Clear search results
+    setSearchTerm("");
+    setSearchResults([]);
   };
 
   return (
@@ -129,10 +122,6 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
-
-        <button className="hamburger" onClick={() => setIsSidebarOpen((prev) => !prev)}>
-          ☰
-        </button>
 
         <div className="nav-tools">
           <div className="search-bar">
@@ -186,7 +175,7 @@ const Navbar = () => {
         content={modalContent}
         selectedProduct={selectedProduct}
         handleLogout={handleLogout}
-        userProfile={userProfile} // Pass userProfile to Modal
+        userProfile={userProfile}
       />
     </>
   );
