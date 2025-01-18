@@ -3,10 +3,9 @@ C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\mo
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\model\User.java
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\service\CartService.java
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\service\ProductService.java
-C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\service\UserFavoritesService.java
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\service\UserFavouriteService.java
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\service\UserService.java
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\servlet\CartServlet.java
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\servlet\ProductServlet.java
-C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\servlet\UserFavoritesServlet.java
+C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\servlet\UserFavouriteServlet.java
 C:\Users\______\Desktop\PetParade\petparade\backend\src\main\java\com\example\servlet\UserServlet.java

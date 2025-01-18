@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Product.css";
 import { useLocation } from "react-router-dom";
-import { useCart } from "../CartContext"; // Import CartContext to use global cart state
-import { useFavourites } from "../Favourite";
+import { useCart } from "../CartContext"; // Import CartContext for cart state
+import { useFavourites } from "../Favourite"; // Import FavouriteContext
 
 const ProductCard = ({ product, openModal }) => {
-  const { favourites, addToFavourites, removeFromFavourites } = useFavourites(); // Use global favorites context
-  const [statusMessage, setStatusMessage] = useState(""); // State to track status message
-  const isFavorited = favourites.some((item) => item.id === product.id); // Check if product is favorited
+  const { favourites, addToFavourites, removeFromFavourites } = useFavourites();
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const isFavorited = favourites.includes(product.id);
 
   const handleFavoriteClick = () => {
     if (isFavorited) {
@@ -18,15 +19,14 @@ const ProductCard = ({ product, openModal }) => {
       setStatusMessage(`Added ${product.name} to favorites`);
     }
 
-    // Clear the status message after 3 seconds
-    setTimeout(() => setStatusMessage(""), 3000);
+    setTimeout(() => setStatusMessage(""), 3000); // Clear the status message
   };
 
   return (
     <div className="product-card">
       <img src={product.image} alt={product.name} className="product-image" />
       <h3 className="product-name">{product.name}</h3>
-      <p className="product-price">{product.price}</p>
+      <p className="product-price">RM {product.price}</p>
       <p className="product-description">{product.description}</p>
       <div className="button-container">
         <button className="add-to-cart" onClick={() => openModal(product)}>
@@ -40,7 +40,6 @@ const ProductCard = ({ product, openModal }) => {
           <i className="fas fa-heart"></i>
         </div>
       </div>
-      {/* Display status message */}
       {statusMessage && <p className="status-message">{statusMessage}</p>}
     </div>
   );
@@ -50,19 +49,13 @@ const Modal = ({ product, closeModal, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (action) => {
-    setQuantity((prevQuantity) => {
-      if (action === "increment") return prevQuantity + 1;
-      if (action === "decrement" && prevQuantity > 1) return prevQuantity - 1;
-      return prevQuantity;
-    });
+    setQuantity((prev) => (action === "increment" ? prev + 1 : Math.max(1, prev - 1)));
   };
 
   const handleAddToCart = () => {
-    addToCart(product, quantity); // Use global addToCart
+    addToCart(product, quantity);
     closeModal();
   };
-
-  const totalPrice = (product.price * quantity).toFixed(2); // Calculate total price
 
   return (
     <div className="modal-overlay">
@@ -73,73 +66,59 @@ const Modal = ({ product, closeModal, addToCart }) => {
         <img src={product.image} alt={product.name} className="modal-product-image" />
         <h2>{product.name}</h2>
         <p>{product.description}</p>
-        <p>Price: RM {totalPrice}</p> {/* Dynamically updated price */}
+        <p>Price: RM {(product.price * quantity).toFixed(2)}</p>
 
         <div className="quantity-wrapper">
-          <label htmlFor="quantity" className="quantity-label">
-            Quantity:
-          </label>
-          <div className="quantity-control">
-            <button
-              className="quantity-btn"
-              onClick={() => handleQuantityChange("decrement")}
-            >
-              −
-            </button>
-            <input
-              type="number"
-              id="quantity"
-              className="quantity-input"
-              value={quantity}
-              readOnly
-            />
-            <button
-              className="quantity-btn"
-              onClick={() => handleQuantityChange("increment")}
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        <div className="button-container">
-          <button className="add-to-cart" onClick={handleAddToCart}>
-            Add to Cart
+          <button
+            className="quantity-btn"
+            onClick={() => handleQuantityChange("decrement")}
+          >
+            −
+          </button>
+          <input type="number" value={quantity} readOnly className="quantity-input" />
+          <button
+            className="quantity-btn"
+            onClick={() => handleQuantityChange("increment")}
+          >
+            +
           </button>
         </div>
+
+        <button className="add-to-cart" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );
 };
 
-const ProductSection = ({ title, products, openModal }) => {
-  return (
-    <div className="product-section">
-      <h2>{title}</h2>
-      <div className="product-list">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} openModal={openModal} />
-        ))}
-      </div>
+const ProductSection = ({ title, products, openModal }) => (
+  <div className="product-section">
+    <h2>{title}</h2>
+    <div className="product-list">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          product={product}
+          openModal={openModal} // Pass openModal to ProductCard
+        />
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 const Product = () => {
-  const { addToCart } = useCart(); // Use global addToCart from CartContext
-  const [products, setProducts] = useState([]); // Store all products
+  const { addToCart } = useCart();
+  const [products, setProducts] = useState([]);
   const [modalProduct, setModalProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal state
-  const [loading, setLoading] = useState(true); // For loading state
-  const [error, setError] = useState(null); // For error handling
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch products from the backend
   useEffect(() => {
-    fetch("/api/products") // Replace with your backend endpoint
+    fetch("/api/products")
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
+        if (!response.ok) throw new Error("Failed to fetch products");
         return response.json();
       })
       .then((data) => {
@@ -163,7 +142,6 @@ const Product = () => {
     setIsModalOpen(false);
   };
 
-  // Categorize products by category (if backend provides a category field)
   const catProducts = products.filter((product) => product.category === "cat");
   const dogProducts = products.filter((product) => product.category === "dog");
   const smallPetProducts = products.filter(
@@ -172,12 +150,10 @@ const Product = () => {
 
   const location = useLocation();
   const { state } = location;
-  const preselectedProduct = state?.product; // Check if product was passed
+  const preselectedProduct = state?.product;
 
   useEffect(() => {
-    if (preselectedProduct) {
-      openModal(preselectedProduct); // Automatically open modal
-    }
+    if (preselectedProduct) openModal(preselectedProduct);
   }, [preselectedProduct]);
 
   return (
@@ -189,8 +165,16 @@ const Product = () => {
 
       {!loading && !error && (
         <>
-          <ProductSection title="Cat Products" products={catProducts} openModal={openModal} />
-          <ProductSection title="Dog Products" products={dogProducts} openModal={openModal} />
+          <ProductSection
+            title="Cat Products"
+            products={catProducts}
+            openModal={openModal}
+          />
+          <ProductSection
+            title="Dog Products"
+            products={dogProducts}
+            openModal={openModal}
+          />
           <ProductSection
             title="Small Pet Products"
             products={smallPetProducts}

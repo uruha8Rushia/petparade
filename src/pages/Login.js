@@ -1,33 +1,52 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFavourites } from "../Favourite"; // Ensure Favourite context is imported
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { setFavourites } = useFavourites(); // Destructure setFavourites from useFavourites
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(""); // Clear previous errors
     try {
       const response = await fetch("/api/user", {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `action=login&username=${username}&password=${password}`
+        body: `action=login&username=${username}&password=${password}`,
       });
       const data = await response.json();
+      setLoading(false);
       if (data.message === "Login successful") {
+        localStorage.setItem("username", username);
+
+        // Fetch favourites after login
+        fetch(`/api/favourites?username=${username}`)
+          .then((response) => response.json())
+          .then((fetchedFavourites) => {
+            setFavourites(fetchedFavourites); // Sync favourites state
+          })
+          .catch((error) => console.error("Error fetching favourites:", error));
+
         if (data.role === "admin") {
           navigate("/admin");
         } else {
           navigate("/home");
         }
       } else {
-        alert(data.message);
+        setError(data.message); // Display backend message as error
       }
     } catch (error) {
+      setLoading(false);
+      setError("Something went wrong. Please try again."); // General error message
       console.error("Error:", error);
     }
   };
@@ -64,7 +83,10 @@ const Login = () => {
                 />
               </div>
             </div>
-            <button type="submit" className="login-button">Login</button>
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </button>
+            {error && <p className="error-message">{error}</p>}
           </form>
         </div>
       </div>

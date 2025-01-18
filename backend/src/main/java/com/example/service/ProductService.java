@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductService {
     private static final String PRODUCT_FILE_PATH = "products.json"; // Ensure this path exists
@@ -76,5 +77,16 @@ public class ProductService {
         } catch (IOException e) {
             System.err.println("Error saving products: " + e.getMessage());
         }
+    }
+
+    /**
+     * Retrieves a list of products by their IDs.
+     * @param ids List of product IDs to retrieve
+     * @return List of products matching the given IDs
+     */
+    public List<Product> getProductsByIds(List<Integer> ids) {
+        return products.stream()
+                .filter(product -> ids.contains(product.getId()))
+                .collect(Collectors.toList());
     }
 }

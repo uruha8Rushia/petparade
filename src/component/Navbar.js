@@ -6,25 +6,50 @@ import { useFavourites } from "../Favourite";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [modalContent, setModalContent] = useState(""); // Modal content
-  const [selectedProduct, setSelectedProduct] = useState(null); // Track selected product
-  const [searchTerm, setSearchTerm] = useState(""); // Search term state
-  const [searchResults, setSearchResults] = useState([]); // Search results state
-  const [products, setProducts] = useState([]); // Store all products for search
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  const { cartItems } = useCart(); // Access cart items from CartContext
-  const { favourites, toggleFavourite } = useFavourites(); // Access favourites and toggle function
-  const navigate = useNavigate(); // Hook for navigation
+  const { cartItems } = useCart(); // Access cart items
+  const { favourites, setFavourites } = useFavourites(); // Access favourites from FavouriteContext
+  const navigate = useNavigate();
 
   // Fetch products from the backend for search functionality
   useEffect(() => {
-    fetch("/api/products") // Replace with your backend endpoint
+    fetch("/api/products")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
+
+  // Fetch favourites for the logged-in user on component mount
+  useEffect(() => {
+    const fetchFavourites = async () => {
+      const username = localStorage.getItem("username");
+      if (!username) {
+        setFavourites([]); // Clear favourites if no user is logged in
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/favourites?username=${username}`);
+        if (response.ok) {
+          const data = await response.json();
+          setFavourites(data); // Update favourites state with backend data
+        } else {
+          console.error("Failed to fetch favourites");
+        }
+      } catch (error) {
+        console.error("Error fetching favourites:", error);
+      }
+    };
+
+    fetchFavourites();
+  }, [setFavourites]);
 
   // Handle search logic
   useEffect(() => {
@@ -43,39 +68,41 @@ const Navbar = () => {
   };
 
   const handleProductSelect = (product) => {
-    navigate("/product", { state: { product } }); // Navigate to product page and pass product data
-    setSearchTerm(""); // Clear search term
-    setSearchResults([]); // Clear search results
+    navigate("/product", { state: { product } });
+    setSearchTerm("");
+    setSearchResults([]);
   };
 
   const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
+    setIsSidebarOpen((prev) => !prev);
   };
 
   const closeSidebar = () => {
-    setIsSidebarOpen(false); // Close the sidebar
+    setIsSidebarOpen(false);
   };
 
   const openModal = (content, product = null) => {
-    setModalContent(content); // Set the modal content dynamically
-    setSelectedProduct(product); // Set the selected product if provided
-    setIsModalOpen(true); // Open the modal
+    setModalContent(content);
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
-    setModalContent(""); // Clear the modal content
-    setSelectedProduct(null); // Clear the selected product
+    setIsModalOpen(false);
+    setModalContent("");
+    setSelectedProduct(null);
   };
 
   const handleLogout = () => {
-    console.log("User logged out");
+    localStorage.removeItem("username"); // Clear username from localStorage
+    setFavourites([]); // Clear favourites state
+    navigate("/login"); // Redirect to the login page
     closeModal();
+    console.log("User logged out");
   };
 
   return (
     <>
-      {/* Navbar */}
       <nav className="navbar">
         <img src="/nav_logo.png" alt="Logo" className="nav-logo" />
 
@@ -144,6 +171,9 @@ const Navbar = () => {
               onClick={() => openModal("Favorite Items")}
             >
               <i className="fas fa-heart"></i>
+              {favourites.length > 0 && (
+                <span className="favorites-count">{favourites.length}</span>
+              )}
             </div>
             <div
               className="nav-icon"

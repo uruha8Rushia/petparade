@@ -59,11 +59,15 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
                         View Product
                       </button>
                       <button
-                        className="unfavourite-button"
-                        onClick={() => removeFromFavourites(item.id)}
+                          className="unfavourite-button"
+                          onClick={async () => {
+                              await removeFromFavourites(item.id); // Call the remove function
+                              onClose(); // Close the modal (optional)
+                          }}
                       >
-                        Unfavourite
+                          Unfavourite
                       </button>
+
                     </td>
                   </tr>
                 ))}
@@ -117,7 +121,7 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
           <>
             <h2>User Profile</h2>
             <div className="user-profile">
-              <img src="/profile.png" alt="Profile" className="profile-picture" />
+              <img src="/prfile.png" alt="Profile" className="profile-picture" />
               <div className="user-info">
                 <p><strong>Name:</strong> John Doe</p>
                 <p><strong>Email:</strong> john.doe@example.com</p>

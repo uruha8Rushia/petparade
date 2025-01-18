@@ -123,6 +123,53 @@
   margin-right: 15px; /* Add spacing between the image and text */
 }
 
+/* Quantity Wrapper */
+.quantity-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers elements horizontally */
+  gap: 10px; /* Adds space between buttons and the input */
+  margin: 10px 0; /* Adds vertical margin for spacing */
+}
+
+/* Quantity Wrapper */
+.quantity-wrapper {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  justify-content: center; /* Centers elements horizontally */
+  gap: 15px; /* Increase spacing for better alignment */
+  margin: 10px 0; /* Adds vertical margin for spacing */
+}
+
+/* Quantity Input */
+.quantity-input {
+  width: 60px; /* Slightly wider for better centering */
+  text-align: center; /* Ensures number is centered */
+  font-size: 16px; /* Matches button size */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 0; /* Ensures vertical centering */
+  box-sizing: border-box; /* Maintains padding and width consistency */
+}
+
+/* Quantity Buttons */
+.quantity-btn {
+  padding: 8px 14px; /* Ensure button dimensions match input */
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #e0e0e0;
+}
+
 /* Common styles for buttons */
 .view-product-button,
 .unfavourite-button {
