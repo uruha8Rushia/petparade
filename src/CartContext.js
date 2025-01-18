@@ -39,8 +39,13 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // Function to clear all items from the cart
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, updateQuantity }}>
+    <CartContext.Provider value={{ cartItems, addToCart, updateQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );

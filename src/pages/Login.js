@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavourites } from "../Favourite"; // Ensure Favourite context is imported
+import { useCart } from "../CartContext"; // Import Cart context to clear the cart
 import "./Login.css";
 
 const Login = () => {
@@ -10,6 +11,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { setFavourites } = useFavourites(); // Destructure setFavourites from useFavourites
+  const { clearCart } = useCart(); // Destructure clearCart from useCart
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,6 +29,9 @@ const Login = () => {
       setLoading(false);
       if (data.message === "Login successful") {
         localStorage.setItem("username", username);
+
+        // Clear the cart when a new user logs in
+        clearCart();
 
         // Fetch favourites after login
         fetch(`/api/favourites?username=${username}`)
