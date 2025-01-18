@@ -229,17 +229,18 @@
 }
 
 .love-btn {
+  color: black; /* Default color */
   font-size: 20px;
   transition: color 0.3s ease;
   cursor: pointer;
 }
 
 .love-btn.favorited {
-  color: red; /* Favorited state */
+  color: red; /* Change to red when favorited */
 }
 
-.love-btn:not(.favorited) {
-  color: black; /* Default state */
+.love-btn:hover {
+  color: #e66c6c; /* Add hover effect */
 }
 
 /* Wrapper for Quantity Label and Control */

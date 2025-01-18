@@ -8,7 +8,8 @@ const ProductCard = ({ product, openModal }) => {
   const { favourites, addToFavourites, removeFromFavourites } = useFavourites();
   const [statusMessage, setStatusMessage] = useState("");
 
-  const isFavorited = favourites.includes(product.id);
+  // Check if the product is in the favorites list
+  const isFavorited = favourites.some((fav) => fav.id === product.id);
 
   const handleFavoriteClick = () => {
     if (isFavorited) {
@@ -19,7 +20,7 @@ const ProductCard = ({ product, openModal }) => {
       setStatusMessage(`Added ${product.name} to favorites`);
     }
 
-    setTimeout(() => setStatusMessage(""), 3000); // Clear the status message
+    setTimeout(() => setStatusMessage(""), 3000); // Clear the status message after 3 seconds
   };
 
   return (
@@ -48,7 +49,9 @@ const Modal = ({ product, closeModal, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (action) => {
-    setQuantity((prev) => (action === "increment" ? prev + 1 : Math.max(1, prev - 1)));
+    setQuantity((prev) =>
+      action === "increment" ? prev + 1 : Math.max(1, prev - 1)
+    );
   };
 
   const handleAddToCart = () => {
