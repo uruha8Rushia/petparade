@@ -117,14 +117,14 @@ const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
         );
       case "User Profile":
         return (
-          <>
+          <div className="user-profile-modal">
             <h2>User Profile</h2>
             <div className="user-profile">
-              <img
-                src={userProfile?.profilePicture || "/profile.png"} // Use default if no profile picture
-                alt="Profile"
-                className="profile-picture"
-              />
+            <img
+              src="/profile.png" // Hardcoded profile picture
+              alt="Profile"
+              className="profile-picture"
+            />
               <div className="user-info">
                 <p><strong>Name:</strong> {userProfile?.name || "Unknown"}</p>
                 <p><strong>Email:</strong> {userProfile?.email || "Unknown"}</p>
@@ -133,7 +133,7 @@ const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
               <button className="logout-button" onClick={handleLogout}>Log out</button>
               </div>
             </div>
-          </>
+          </div>
         );        
       default:
         return null;
