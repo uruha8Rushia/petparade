@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
+
+  const handleBack = () => {
+    navigate(-1);
+  };
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -65,6 +69,7 @@ const Login = () => {
               </div>
             </div>
             <button type="submit" className="login-button">Login</button>
+            <button type="button" className="login-button" onClick={handleBack}>Back to Signup</button>
           </form>
         </div>
       </div>

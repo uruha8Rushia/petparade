@@ -83,6 +83,7 @@
     line-height: 23px;
     outline: none;
     padding: .75rem;
+    margin: 5px;
     text-decoration: none;
     transition: all 235ms ease-in-out;
     border-bottom-left-radius: 15px 255px;
