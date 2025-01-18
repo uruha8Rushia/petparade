@@ -62,7 +62,6 @@ const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
                         className="unfavourite-button"
                         onClick={async () => {
                           await removeFromFavourites(item.id);
-                          onClose();
                         }}
                       >
                         Unfavourite
