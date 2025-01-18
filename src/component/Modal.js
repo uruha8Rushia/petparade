@@ -121,7 +121,7 @@ const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
             <h2>User Profile</h2>
             <div className="user-profile">
               <img
-                src={userProfile?.profilePicture || "/ssprofile.png"} // Use default if no profile picture
+                src={userProfile?.profilePicture || "/profile.png"} // Use default if no profile picture
                 alt="Profile"
                 className="profile-picture"
               />
@@ -129,8 +129,8 @@ const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
                 <p><strong>Name:</strong> {userProfile?.name || "Unknown"}</p>
                 <p><strong>Email:</strong> {userProfile?.email || "Unknown"}</p>
               </div>
-              <div className="tab-buttons">
-                <button className="tab-button" onClick={handleLogout}>Log out</button>
+              <div className="button-container">
+              <button className="logout-button" onClick={handleLogout}>Log out</button>
               </div>
             </div>
           </>

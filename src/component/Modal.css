@@ -1,14 +1,54 @@
 /* Modal Content */
 .modal-content {
-  background-image: url("/public/profile-background.png");
+  background-color: white; /* Consistent background */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 20px; /* General padding */
   max-width: 500px;
   width: 90%;
+  position: relative;
   transform: scale(0.5); /* Initial scale */
   opacity: 0; /* Start invisible */
   animation: popOut 0.3s forwards; /* Pop-out animation */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: space-between; /* Push button to bottom */
+  height: auto; /* Let content define height */
+  min-height: 250px; /* Prevent collapsing with smaller content */
+}
+
+.user-info {
+  text-align: left; /* Center-align the text */
+  margin-top: 20px;
+}
+
+.button-container {
+  margin-top: 40px; /* Push it to the bottom of the modal */
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  padding: 10px 0; /* Add padding to separate from content */
+}
+
+/* Center Log out button at the bottom */
+.logout-button {
+  padding: 10px 25px; /* Increase padding for a larger button */
+  font-size: 16px; /* Increase font size for larger text */
+  width: auto; /* Allow the width to adjust with the padding */
+  height: auto; /* Adjusts height based on padding */
+  position: absolute; /* Position it at the bottom */
+  bottom: 20px; /* Keep it at the bottom */
+  left: 50%; /* Move it to the center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  padding: 10px 20px;
+  background-color: #f44336; /* Keep the color */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f; /* Darker blue on hover */
 }
 
 /* Keyframes for Fade-In */
