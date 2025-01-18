@@ -4,6 +4,10 @@ import { useFavourites } from "../Favourite"; // Ensure Favourite context is imp
 import "./Login.css";
 
 const Login = () => {
+
+  const handleBack = () => {
+    navigate(-1);
+  };
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
