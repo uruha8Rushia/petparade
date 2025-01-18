@@ -90,6 +90,7 @@ const Login = () => {
             <button type="submit" className="login-button" disabled={loading}>
               {loading ? "Logging in..." : "Login"}
             </button>
+            <button type="button" className="login-button" onClick={handleBack}>Back to Signup</button>
             {error && <p className="error-message">{error}</p>}
           </form>
         </div>
