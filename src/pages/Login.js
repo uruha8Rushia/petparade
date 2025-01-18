@@ -4,10 +4,6 @@ import { useFavourites } from "../Favourite"; // Ensure Favourite context is imp
 import "./Login.css";
 
 const Login = () => {
-
-  const handleBack = () => {
-    navigate(-1);
-  };
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -55,6 +51,10 @@ const Login = () => {
     }
   };
 
+  const handleSignupRedirect = () => {
+    navigate("/"); // Redirect to the signup page
+  };
+
   return (
     <div>
       <div className="login-container">
@@ -90,7 +90,13 @@ const Login = () => {
             <button type="submit" className="login-button" disabled={loading}>
               {loading ? "Logging in..." : "Login"}
             </button>
-            <button type="button" className="login-button" onClick={handleBack}>Back to Signup</button>
+            <button
+              type="button"
+              className="login-button"
+              onClick={handleSignupRedirect}
+            >
+              Signup
+            </button>
             {error && <p className="error-message">{error}</p>}
           </form>
         </div>
