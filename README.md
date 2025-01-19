@@ -50,8 +50,9 @@ The project utilizes **React** for the frontend, **Java OOP** for backend logic,
    ```
 
 2. Build and deploy the project:
-   - mvn tomcat7:run
-
+    ```bash
+    mvn tomcat7:run
+    ```
 #### Front Setup
 1. Navigate to the frontend folder:
    ```bash
