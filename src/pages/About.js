@@ -94,7 +94,7 @@ const AboutUs = () => {
               <h3 class="team-name">Wei Qing</h3>
               <p class="team-role">UX/UI Designer</p>
               <p class="team-bio">
-                Alice crafts engaging designs to enhance the user experience.
+                Hello! I specialize in creating visually stunning and user-friendly designs to provide an enjoyable experience for our users. My mission is to ensure that every interaction with Pet Parade feels seamless and delightful!
               </p>
             </div>
             <div class="team-card">
@@ -102,7 +102,7 @@ const AboutUs = () => {
               <h3 class="team-name">Xin Jing</h3>
               <p class="team-role">Content Strategist</p>
               <p class="team-bio">
-                Bob curates the compelling content that brings Pet Parade's vision to life.
+              My name is Yeoh Xin Jing. I'm working on the content strategies for Pet Parade Shop which focus on engaging pet lovers through captivating visuals, informative posts, and interactive campaigns to build a loyal and vibrant community.
               </p>
             </div>
           </div>

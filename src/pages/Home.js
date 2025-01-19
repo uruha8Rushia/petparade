@@ -16,69 +16,69 @@ const Home = () => {
   const topSellerProducts = [
     {
       image: "/product1.jpg",
-      name: "Amanova Cat Pouch 85g Kitten Chicken & Fish Complete Wet Cat Food",
+      name: "Wet Cat Food",
       cost: "RM 3.99"
     },
     {
-      image: "/product2.png",
+      image: "/product3.jpeg",
       name: "Fluffy Cat Bed",
-      cost: "RM xx"
+      cost: "RM 12.00"
     },
     {
-      image: "/product3.png",
-      name: "Toy",
-      cost: "RM xx"
+      image: "/product2.jpg",
+      name: "Cat Toy",
+      cost: "RM 5.99"
     },
     {
-      image: "/product4.png",
-      name: "Toy",
-      cost: "RM xx"
+      image: "/product4.jpg",
+      name: "Cat health care product",
+      cost: "RM 20.00"
     },
   ];
 
   const topSellerProducts2 = [
     {
-      image: "/product1.jpg",
-      name: "Amanova Cat Pouch 85g Kitten Chicken & Fish Complete Wet Cat Food",
+      image: "/dog1.jpeg",
+      name: "Pedigree Adult Dog Food",
       cost: "RM 3.99"
     },
     {
-      image: "/product2.png",
-      name: "Fluffy Cat Bed",
-      cost: "RM xx"
+      image: "/dog2.jpg",
+      name: "Fluffy dog Bed",
+      cost: "RM 12.00"
     },
     {
-      image: "/product3.png",
-      name: "Toy",
-      cost: "RM xx"
+      image: "/dog3.jpg",
+      name: "Dog Toy",
+      cost: "RM 9.99"
     },
     {
-      image: "/product4.png",
-      name: "Toy",
-      cost: "RM xx"
+      image: "/dog4.jpg",
+      name: "Dog health care product",
+      cost: "RM 19.99"
     },
   ];
 
   const topSellerProducts3 = [
     {
-      image: "/product1.jpg",
-      name: "Amanova Cat Pouch 85g Kitten Chicken & Fish Complete Wet Cat Food",
+      image: "/smallpet1.jpg",
+      name: "Fish food",
       cost: "RM 3.99"
     },
     {
-      image: "/product2.png",
-      name: "Fluffy Cat Bed",
-      cost: "RM xx"
+      image: "/smallpet2.jpeg",
+      name: "Hamster Food",
+      cost: "RM 3.99"
     },
     {
-      image: "/product3.png",
-      name: "Toy",
-      cost: "RM xx"
+      image: "/smallpet3.jpg",
+      name: "Bird Food",
+      cost: "RM 4.99"
     },
     {
-      image: "/product4.png",
-      name: "Toy",
-      cost: "RM xx"
+      image: "/smallpet4.jpeg",
+      name: "Dog's clothes",
+      cost: "RM 20.00"
     },
   ];
 
