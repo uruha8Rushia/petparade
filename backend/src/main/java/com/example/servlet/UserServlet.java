@@ -57,12 +57,22 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-
     private void handleRegister(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String role = req.getParameter("role"); // Get role from request
+
+        // Check for null or empty fields
+        if (username == null || username.isEmpty() || 
+            password == null || password.isEmpty() || 
+            email == null || email.isEmpty()) {
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write("{\"message\": \"All fields are required\"}");
+            return;
+        }
 
         User user = new User();
         user.setUsername(username);
@@ -77,6 +87,7 @@ public class UserServlet extends HttpServlet {
         if (success) {
             resp.getWriter().write("{\"message\": \"User registered successfully\"}");
         } else {
+            resp.setStatus(HttpServletResponse.SC_CONFLICT);
             resp.getWriter().write("{\"message\": \"Username already exists\"}");
         }
     }

@@ -8,26 +8,32 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `action=register&username=${username}&password=${password}&email=${email}`
-      });
-      const data = await response.json();
-      if (data.message === "User registered successfully") {
-        navigate("/Home");
-      } else {
-        alert(data.message);
+    const handleSignup = async (e) => {
+      e.preventDefault(); // Prevent default form submission
+      try {
+          // Send POST request to server
+          const response = await fetch("/api/user", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: `action=register&username=${username}&password=${password}&email=${email}`,
+          });
+
+          const data = await response.json();
+
+          // Handle response
+          if (data.message === "User registered successfully") {
+              alert("Account created successfully! Please log in.");
+              navigate("/login"); // Redirect to login page
+          } else {
+              alert(data.message); // Show error message from server
+          }
+      } catch (error) {
+          console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
+
 
   return (
     <div className="signup-container">
