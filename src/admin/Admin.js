@@ -3,7 +3,7 @@ import "./Admin.css";
 
 const Admin = () => {
   const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({ name: "", price: "", description: "", image: "" });
+  const [newProduct, setNewProduct] = useState({ name: "", price: "", description: "", category: "", image: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -19,40 +19,41 @@ const Admin = () => {
   }, []);
 
   // Add a new product
-  const handleAddProduct = async () => {
-    if (!newProduct.name || !newProduct.price) {
-      setError("Please fill out all fields");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-    try {
-      const productToAdd = {
-        ...newProduct,
-        image: "product1.jpg", // Set default image for new products
-      };
-
-      const response = await fetch("/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(productToAdd),
-      });
-
-      if (response.ok) {
-        const createdProduct = await response.json();
-        setProducts([...products, createdProduct]);
-        setNewProduct({ name: "", price: "", description: "" }); // Reset the form
-      } else {
-        setError("Failed to add product");
+    const handleAddProduct = async () => {
+      if (!newProduct.name || !newProduct.price || !newProduct.category) {
+          setError("Please fill out all fields");
+          return;
       }
-    } catch {
-      setError("Error adding product");
-    } finally {
-      setLoading(false);
-    }
-  };
 
+      setLoading(true);
+      setError("");
+      try {
+          const productToAdd = {
+              ...newProduct,
+              image: "product1.jpg", // Default image for new products
+          };
+
+          const response = await fetch("/api/products", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(productToAdd),
+          });
+
+          const result = await response.text(); // Capture backend response
+
+          if (response.ok) {
+              const createdProduct = JSON.parse(result);
+              setProducts([...products, createdProduct]);
+              setNewProduct({ name: "", price: "", description: "", category: "" }); // Reset form
+          } else {
+              setError(result); // Display backend error message
+          }
+      } catch (err) {
+          setError("Error adding product");
+      } finally {
+          setLoading(false);
+      }
+  };
 
   // Remove a product
   const handleRemoveProduct = async (id) => {
@@ -62,7 +63,7 @@ const Admin = () => {
       const response = await fetch(`/api/products/${id}`, {
         method: "DELETE",
       });
-  
+
       if (response.ok) {
         // Re-fetch products from the backend to ensure updated data
         const updatedResponse = await fetch("/api/products");
@@ -76,14 +77,13 @@ const Admin = () => {
     } finally {
       setLoading(false);
     }
-  };  
+  };
 
   return (
     <div className="admin-container">
       <h1>Admin - Manage Products</h1>
 
       {/* Add Product Section */}
-      {/* Add Product Form */}
       <div className="add-product">
         <h2>Add Product</h2>
         <input
@@ -103,18 +103,24 @@ const Admin = () => {
           value={newProduct.description}
           onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
         />
-        <button 
-          className="add-btn" 
-          onClick={handleAddProduct} disabled={loading}>
+        <select
+          value={newProduct.category}
+          onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+          className="category-select"
+        >
+          <option value="">Select Product Category</option>
+          <option value="cat">Cat</option>
+          <option value="dog">Dog</option>
+          <option value="small-pet">Small Pet</option>
+        </select>
+        <button className="add-btn" onClick={handleAddProduct} disabled={loading}>
           {loading ? "Adding..." : "Add Product"}
         </button>
       </div>
 
-
       {/* Error Message */}
       {error && <p className="error-message">{error}</p>}
 
-      {/* Product List */}
       {/* Product List */}
       <div className="product-list">
         {products.map((product) => (
@@ -123,9 +129,9 @@ const Admin = () => {
             <h3>{product.name}</h3>
             <p>Price: RM {product.price}</p>
             <p>{product.description}</p>
-            {/* Add a Remove button */}
-            <button 
-              className="remove-btn" 
+            <p>Category: {product.category}</p>
+            <button
+              className="remove-btn"
               onClick={() => handleRemoveProduct(product.id)}
             >
               Remove

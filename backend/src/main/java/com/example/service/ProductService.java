@@ -33,10 +33,16 @@ public class ProductService {
      */
     public void addProduct(Product product) {
         List<Product> productList = ProductUtil.loadProducts();
+    
+        // Add the new product
         productList.add(product);
-        ProductUtil.saveProducts(productList); // Save updated product list
+    
+        // Save updated product list
+        ProductUtil.saveProducts(productList);
+    
         System.out.println("Product added: " + product);
     }
+    
 
     /**
      * Deletes a product by its ID and ensures the deletion is reflected in the JSON file,

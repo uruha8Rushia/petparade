@@ -101,4 +101,23 @@
   .remove-btn:hover {
     background-color: #ff7875; /* Slightly lighter red on hover */
   }
+
+  .category-select {
+    width: 100%; /* Full width */
+    max-width: 400px; /* Set a maximum width */
+    padding: 15px; /* Increase padding for a larger clickable area */
+    font-size: 18px; /* Larger font size */
+    border: 2px solid #ccc; /* Border styling */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Add spacing above */
+    margin-bottom: 20px; /* Add spacing below */
+    cursor: pointer; /* Pointer cursor */
+  }
+  
+  .category-select:focus {
+    outline: none; /* Remove focus outline */
+    border-color: #4CAF50; /* Green border on focus */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Add shadow on focus */
+  }
+  
   

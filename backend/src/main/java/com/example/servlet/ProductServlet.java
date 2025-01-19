@@ -47,6 +47,44 @@ public class ProductServlet extends HttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            // Parse incoming JSON data
+            req.setCharacterEncoding("UTF-8");
+            resp.setContentType("application/json");
+            Gson gson = new Gson();
+            Product newProduct = gson.fromJson(req.getReader(), Product.class);
+
+            // Validate the incoming data
+            if (newProduct.getName() == null || newProduct.getName().isEmpty() ||
+                newProduct.getPrice() <= 0 || newProduct.getCategory() == null || newProduct.getCategory().isEmpty()) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write("Invalid product data: Ensure all fields are filled correctly.");
+                return;
+            }
+
+            // Ensure unique ID assignment
+            List<Product> productList = productService.getProducts();
+            int maxId = productList.stream()
+                                .mapToInt(Product::getId)
+                                .max()
+                                .orElse(0);
+            newProduct.setId(maxId + 1); // Assign new unique ID
+
+            // Add the product using ProductService
+            productService.addProduct(newProduct);
+
+            // Send success response
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.getWriter().write(new Gson().toJson(newProduct));
+        } catch (Exception e) {
+            // Log the error and send appropriate response
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to add product");
+        }
+    }
+
+    @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             // Extract the product ID from the URL
