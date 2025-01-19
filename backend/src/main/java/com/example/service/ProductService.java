@@ -1,17 +1,17 @@
 package com.example.service;
 
-import com.example.model.Product;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.model.Product;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ProductService {
-    private static final String PRODUCT_FILE_PATH = "products.json"; // Ensure this path exists
+    private static final String PRODUCT_FILE_PATH = "src/main/resources/products.json"; // Ensure this path exists
     private final ObjectMapper objectMapper;
     private List<Product> products;
 
@@ -20,10 +20,6 @@ public class ProductService {
         this.products = loadProducts();
     }
 
-    /**
-     * Retrieves all products.
-     * @return List of products
-     */
     public List<Product> getProducts() {
         if (products == null || products.isEmpty()) {
             products = loadProducts(); // Reload in case the list is empty
@@ -31,33 +27,30 @@ public class ProductService {
         return products;
     }
 
-    /**
-     * Adds a product to the list and saves it to the JSON file.
-     * @param product The product to be added
-     */
     public void addProduct(Product product) {
         products.add(product);
         saveProducts();
     }
 
-    /**
-     * Removes a product based on its ID.
-     * @param productId The ID of the product to remove
-     */
-    public void removeProduct(String productId) {
-        products.removeIf(product -> String.valueOf(product.getId()).equals(productId));
+    public void updateProduct(Product updatedProduct) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getId() == updatedProduct.getId()) {
+                products.set(i, updatedProduct);
+                break;
+            }
+        }
         saveProducts();
     }
 
-    /**
-     * Loads products from the JSON file.
-     * @return List of products
-     */
+    public void removeProduct(int productId) {
+        products.removeIf(product -> product.getId() == productId);
+        saveProducts();
+    }
+
     private List<Product> loadProducts() {
         try {
             File file = new File(PRODUCT_FILE_PATH);
             if (file.exists()) {
-                // Load and parse the JSON file into a list of products
                 return objectMapper.readValue(file, new TypeReference<List<Product>>() {});
             } else {
                 return new ArrayList<>(); // Return an empty list if the file doesn't exist
@@ -68,9 +61,6 @@ public class ProductService {
         }
     }
 
-    /**
-     * Saves the current list of products to the JSON file.
-     */
     private void saveProducts() {
         try {
             objectMapper.writeValue(new File(PRODUCT_FILE_PATH), products);
@@ -79,11 +69,6 @@ public class ProductService {
         }
     }
 
-    /**
-     * Retrieves a list of products by their IDs.
-     * @param ids List of product IDs to retrieve
-     * @return List of products matching the given IDs
-     */
     public List<Product> getProductsByIds(List<Integer> ids) {
         return products.stream()
                 .filter(product -> ids.contains(product.getId()))

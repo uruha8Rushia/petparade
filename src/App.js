@@ -12,6 +12,7 @@ import LoginForm from "./pages/Login";
 import Signup from "./pages/Signup";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
+import Admin from "./admin/Admin";
 import { CartProvider } from "./CartContext"; // Import CartProvider
 import { FavouriteProvider } from "./Favourite";
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/payment-faq" element={<PaymentFAQ />} />
         <Route path="/delivery-faq" element={<DeliveryFAQ />} />
         <Route path="/returns-faq" element={<ReturnsFAQ />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       {/* Conditionally render the Footer */}
       {!hideNavbarFooter && <Footer />}
