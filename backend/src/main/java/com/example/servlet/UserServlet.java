@@ -1,6 +1,7 @@
 package com.example.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,6 +48,11 @@ public class UserServlet extends HttpServlet {
         User user = userService.getUser(username);
 
         if (user != null) {
+            // Ensure favourites is not null
+            if (user.getFavourites() == null) {
+                user.setFavourites(new ArrayList<>());
+            }
+
             // Build JSON response
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonResponse = objectMapper.writeValueAsString(user);
@@ -79,6 +85,7 @@ public class UserServlet extends HttpServlet {
         user.setPassword(password);
         user.setEmail(email);
         user.setRole(role);
+        user.setFavourites(new ArrayList<>());
 
         boolean success = userService.register(user);
 
@@ -122,6 +129,11 @@ public class UserServlet extends HttpServlet {
         User user = userService.getUser(username);
 
         if (user != null) {
+            // Ensure favourites is not null
+            if (user.getFavourites() == null) {
+                user.setFavourites(new ArrayList<>());
+            }
+
             // Build JSON response
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonResponse = objectMapper.writeValueAsString(user);

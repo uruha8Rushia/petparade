@@ -5,11 +5,11 @@ import { useCart } from "../CartContext"; // Import CartContext for cart state
 import { useFavourites } from "../Favourite"; // Import FavouriteContext
 
 const ProductCard = ({ product, openModal }) => {
-  const { favourites, addToFavourites, removeFromFavourites } = useFavourites();
+  const { favourites = [], addToFavourites, removeFromFavourites } = useFavourites();
   const [statusMessage, setStatusMessage] = useState("");
 
   // Check if the product is in the favorites list
-  const isFavorited = favourites.some((fav) => fav.id === product.id);
+  const isFavorited = Array.isArray(favourites) && favourites.some((fav) => fav.id === product.id);
 
   const handleFavoriteClick = () => {
     if (isFavorited) {

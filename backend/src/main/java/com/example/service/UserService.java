@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,30 +23,33 @@ public class UserService {
         ensureAdminUser();
     }
 
-    // Register a new user
     public boolean register(User user) {
         if (users.containsKey(user.getUsername())) {
             return false; // User already exists
+        }
+        if (user.getFavourites() == null) {
+            user.setFavourites(new ArrayList<>()); // Ensure favourites is initialized
         }
         users.put(user.getUsername(), user);
         saveUsers();
         return true;
     }
 
-    // User login
     public User login(String username, String password) {
         User user = users.get(username);
         if (user != null && user.getPassword().equals(password)) {
+            if (user.getFavourites() == null) {
+                user.setFavourites(new ArrayList<>()); // Ensure favourites is initialized on login
+            }
             return user;
         }
         return null;
     }
 
-    // Add a product to user's favourites
     public boolean addFavourite(String username, int productId) {
         User user = users.get(username);
         if (user != null) {
-            if (!user.getFavourites().contains(productId)) { // Avoid duplicate favourites
+            if (!user.getFavourites().contains(productId)) {
                 user.addFavourite(productId);
                 saveUsers();
                 return true;
@@ -54,11 +58,10 @@ public class UserService {
         return false; // User not found
     }
 
-    // Remove a product from user's favourites
     public boolean removeFavourite(String username, int productId) {
         User user = users.get(username);
         if (user != null) {
-            if (user.getFavourites().contains(productId)) { // Check if the favourite exists
+            if (user.getFavourites().contains(productId)) {
                 user.removeFavourite(productId);
                 saveUsers();
                 return true;
@@ -67,23 +70,30 @@ public class UserService {
         return false; // User not found
     }
 
-    // Get a user's favourite products
-    public User getUserWithFavourites(String username) {
-        return users.get(username); // Return user object, which includes favourites
-    }
-
-    // Get user details by username
     public User getUser(String username) {
-        return users.get(username); // Return the user object if found
+        User user = users.get(username);
+        if (user != null && user.getFavourites() == null) {
+            user.setFavourites(new ArrayList<>()); // Ensure favourites is initialized when fetching user
+        }
+        return user;
     }
 
-    // Load users from JSON file
+    public User getUserWithFavourites(String username) {
+        return getUser(username);
+    }
+
     private Map<String, User> loadUsers() {
         try {
             File file = new File(USER_FILE_PATH);
             if (file.exists()) {
-                return objectMapper.readValue(file,
+                Map<String, User> loadedUsers = objectMapper.readValue(file,
                         objectMapper.getTypeFactory().constructMapType(HashMap.class, String.class, User.class));
+                loadedUsers.values().forEach(user -> {
+                    if (user.getFavourites() == null) {
+                        user.setFavourites(new ArrayList<>()); // Ensure favourites is initialized during load
+                    }
+                });
+                return loadedUsers;
             } else {
                 return new HashMap<>();
             }
@@ -93,7 +103,6 @@ public class UserService {
         }
     }
 
-    // Save users to JSON file
     private void saveUsers() {
         try {
             objectMapper.writeValue(new File(USER_FILE_PATH), users);
@@ -102,13 +111,13 @@ public class UserService {
         }
     }
 
-    // Ensure admin user exists
     private void ensureAdminUser() {
         if (!users.containsKey(ADMIN_USERNAME)) {
             User admin = new User();
             admin.setUsername(ADMIN_USERNAME);
             admin.setPassword(ADMIN_PASSWORD);
             admin.setRole(ADMIN_ROLE);
+            admin.setFavourites(new ArrayList<>()); // Initialize favourites
             users.put(ADMIN_USERNAME, admin);
             saveUsers();
         }

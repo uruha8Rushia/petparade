@@ -18,7 +18,12 @@ export const FavouriteProvider = ({ children }) => {
         const response = await fetch(`/api/favourites?username=${username}`);
         if (response.ok) {
           const data = await response.json();
-          setFavourites(data); // Sync favourites with the backend
+          if (Array.isArray(data)) {
+            setFavourites(data); // Sync favourites with the backend
+          } else {
+            console.error("Invalid favourites format from backend");
+            setFavourites([]); // Clear on invalid data
+          }
         } else {
           console.error("Failed to fetch favourites");
           setFavourites([]); // Clear on failure

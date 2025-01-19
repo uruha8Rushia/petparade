@@ -36,39 +36,45 @@ const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
                 </tr>
               </thead>
               <tbody>
-                {favourites.map((item) => (
-                  <tr key={item.id}>
-                    <td>
-                      <div className="favorite-item">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="favorite-item-image"
-                        />
-                        <span className="item-name">{item.name}</span>
-                      </div>
-                    </td>
-                    <td>
-                      <button
-                        className="view-product-button"
-                        onClick={() => {
-                          onClose();
-                          navigate("/product", { state: { product: item } });
-                        }}
-                      >
-                        View Product
-                      </button>
-                      <button
-                        className="unfavourite-button"
-                        onClick={async () => {
-                          await removeFromFavourites(item.id);
-                        }}
-                      >
-                        Unfavourite
-                      </button>
-                    </td>
+                {Array.isArray(favourites) && favourites.length > 0 ? (
+                  favourites.map((item) => (
+                    <tr key={item.id}>
+                      <td>
+                        <div className="favorite-item">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="favorite-item-image"
+                          />
+                          <span className="item-name">{item.name}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <button
+                          className="view-product-button"
+                          onClick={() => {
+                            onClose();
+                            navigate("/product", { state: { product: item } });
+                          }}
+                        >
+                          View Product
+                        </button>
+                        <button
+                          className="unfavourite-button"
+                          onClick={async () => {
+                            await removeFromFavourites(item.id);
+                          }}
+                        >
+                          Unfavourite
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="2">No favorites yet.</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </>
@@ -119,21 +125,21 @@ const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
           <div className="user-profile-modal">
             <h2>User Profile</h2>
             <div className="user-profile">
-            <img
-              src="/profile.png" // Hardcoded profile picture
-              alt="Profile"
-              className="profile-picture"
-            />
+              <img
+                src="/profile.png" // Hardcoded profile picture
+                alt="Profile"
+                className="profile-picture"
+              />
               <div className="user-info">
                 <p><strong>Name:</strong> {userProfile?.name || "Unknown"}</p>
                 <p><strong>Email:</strong> {userProfile?.email || "Unknown"}</p>
               </div>
               <div className="button-container">
-              <button className="logout-button" onClick={handleLogout}>Log out</button>
+                <button className="logout-button" onClick={handleLogout}>Log out</button>
               </div>
             </div>
           </div>
-        );        
+        );
       default:
         return null;
     }

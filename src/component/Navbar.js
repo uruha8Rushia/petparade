@@ -120,7 +120,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("username");
-    setFavourites([]);
+    setFavourites([]); // Clear favourites on logout
     navigate("/login");
     closeModal();
     console.log("User logged out");
@@ -188,7 +188,7 @@ const Navbar = () => {
           <div className="nav-icons">
             <div className="nav-icon" onClick={() => openModal("Favorite Items")}>
               <i className="fas fa-heart"></i>
-              {favourites.length > 0 && (
+              {Array.isArray(favourites) && favourites.length > 0 && (
                 <span className="favorites-count">{favourites.length}</span>
               )}
             </div>
