@@ -7,7 +7,7 @@ export const FavouriteProvider = ({ children }) => {
 
   // Fetch favourites for the logged-in user
   useEffect(() => {
-    const username = localStorage.getItem("username"); // Extract username once
+    const username = localStorage.getItem("username");
     if (!username) {
       setFavourites([]); // Clear favourites if no user is logged in
       return;
@@ -30,10 +30,11 @@ export const FavouriteProvider = ({ children }) => {
     };
 
     fetchFavourites();
-  }, []); // Remove dynamic expressions from dependency array
+  }, []);
 
+  // Add product to favourites
   const addToFavourites = async (product) => {
-    const username = localStorage.getItem("username"); // Retrieve username from localStorage
+    const username = localStorage.getItem("username");
     if (!username) {
       console.error("No username found in localStorage");
       return;
@@ -47,7 +48,7 @@ export const FavouriteProvider = ({ children }) => {
         },
         body: new URLSearchParams({
           action: "add",
-          username: username,
+          username,
           productId: product.id,
         }),
       });
@@ -68,8 +69,9 @@ export const FavouriteProvider = ({ children }) => {
     }
   };
 
+  // Remove product from favourites
   const removeFromFavourites = async (productId) => {
-    const username = localStorage.getItem("username"); // Retrieve username from localStorage
+    const username = localStorage.getItem("username");
     if (!username) {
       console.error("No username found in localStorage");
       return;
@@ -83,8 +85,8 @@ export const FavouriteProvider = ({ children }) => {
         },
         body: new URLSearchParams({
           action: "remove",
-          username: username,
-          productId: productId,
+          username,
+          productId,
         }),
       });
 

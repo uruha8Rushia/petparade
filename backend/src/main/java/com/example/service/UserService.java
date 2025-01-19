@@ -72,6 +72,11 @@ public class UserService {
         return users.get(username); // Return user object, which includes favourites
     }
 
+    // Get user details by username
+    public User getUser(String username) {
+        return users.get(username); // Return the user object if found
+    }
+
     // Load users from JSON file
     private Map<String, User> loadUsers() {
         try {

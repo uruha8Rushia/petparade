@@ -1,14 +1,68 @@
 /* Modal Content */
 .modal-content {
-  background-image: url("/public/profile-background.png");
+  background-color: white; /* Ensure consistent background */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 20px; /* Add padding to the entire modal */
+  padding-bottom: 120px; /* Add more space at the bottom for the button */
   max-width: 500px;
   width: 90%;
+  position: relative;
   transform: scale(0.5); /* Initial scale */
   opacity: 0; /* Start invisible */
   animation: popOut 0.3s forwards; /* Pop-out animation */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures spacing between content and button */
+}
+
+.profile-picture {
+  width: 100px; /* Set a smaller width */
+  height: 100px; /* Set a smaller height */
+  border-radius: 50%; /* Make the picture rounded */
+  display: block; /* Center alignment */
+  margin: 0 auto; /* Center horizontally */
+  margin-top: 20px; /* Add spacing from the top */
+  object-fit: cover; /* Ensure the image maintains aspect ratio */
+}
+
+/* Scoped styling for the user profile modal */
+.user-profile-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 60px; /* Add padding at the bottom to make room for the button */
+}
+
+/* Positioning the logout button */
+.user-profile-modal .button-container {
+  width: 100%; /* Ensure container spans the width of the modal */
+  display: flex;
+  justify-content: center; /* Center-align the button */
+  position: absolute; /* Position it relative to the modal */
+  bottom: 20px; /* Move it downward */
+}
+
+/* Styling the logout button */
+.user-profile-modal .logout-button {
+  padding: 12px 28px;
+  font-size: 16px;
+  background-color: #e74c3c; /* Default blue */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-modal .logout-button:hover {
+  background-color: #c0392b; /* Darker blue on hover */
+}
+
+.user-info {
+  text-align: left; /* Center-align the text */
+  margin-top: 20px;
 }
 
 /* Keyframes for Fade-In */
@@ -40,7 +94,7 @@
   right: 10px;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
 }
 

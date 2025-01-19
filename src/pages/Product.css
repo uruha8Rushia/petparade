@@ -229,14 +229,18 @@
 }
 
 .love-btn {
-  color: rgba(0, 0, 0, 0.658);
-  font-size: 20px; /* Adjust icon size */
+  color: black; /* Default color */
+  font-size: 20px;
   transition: color 0.3s ease;
   cursor: pointer;
 }
 
+.love-btn.favorited {
+  color: red; /* Change to red when favorited */
+}
+
 .love-btn:hover {
-  color: #e66c6c;
+  color: #e66c6c; /* Add hover effect */
 }
 
 /* Wrapper for Quantity Label and Control */

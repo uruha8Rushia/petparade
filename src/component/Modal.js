@@ -2,12 +2,12 @@ import React from "react";
 import "./Modal.css";
 import { useCart } from "../CartContext";
 import { useFavourites } from "../Favourite";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
-const Modal = ({ isOpen, onClose, content, handleLogout }) => {
+const Modal = ({ isOpen, onClose, content, handleLogout, userProfile }) => {
   const { cartItems, updateQuantity } = useCart();
   const { favourites, removeFromFavourites } = useFavourites();
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
@@ -52,22 +52,20 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
                       <button
                         className="view-product-button"
                         onClick={() => {
-                          onClose(); // Close the favorites modal
-                          navigate("/product", { state: { product: item } }); // Navigate to product page
+                          onClose();
+                          navigate("/product", { state: { product: item } });
                         }}
                       >
                         View Product
                       </button>
                       <button
-                          className="unfavourite-button"
-                          onClick={async () => {
-                              await removeFromFavourites(item.id); // Call the remove function
-                              onClose(); // Close the modal (optional)
-                          }}
+                        className="unfavourite-button"
+                        onClick={async () => {
+                          await removeFromFavourites(item.id);
+                        }}
                       >
-                          Unfavourite
+                        Unfavourite
                       </button>
-
                     </td>
                   </tr>
                 ))}
@@ -118,25 +116,24 @@ const Modal = ({ isOpen, onClose, content, handleLogout }) => {
         );
       case "User Profile":
         return (
-          <>
+          <div className="user-profile-modal">
             <h2>User Profile</h2>
             <div className="user-profile">
-              <img src="/prfile.png" alt="Profile" className="profile-picture" />
+            <img
+              src="/profile.png" // Hardcoded profile picture
+              alt="Profile"
+              className="profile-picture"
+            />
               <div className="user-info">
-                <p><strong>Name:</strong> John Doe</p>
-                <p><strong>Email:</strong> john.doe@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Account Type:</strong> Premium</p>
-                <p><strong>Member Since:</strong> January 2021</p>
+                <p><strong>Name:</strong> {userProfile?.name || "Unknown"}</p>
+                <p><strong>Email:</strong> {userProfile?.email || "Unknown"}</p>
               </div>
-              <div className="tab-buttons">
-                <button className="tab-button active">View Profile</button>
-                <button className="tab-button">View Order History</button>
-                <button className="tab-button" onClick={handleLogout}>Log out</button>
+              <div className="button-container">
+              <button className="logout-button" onClick={handleLogout}>Log out</button>
               </div>
             </div>
-          </>
-        );
+          </div>
+        );        
       default:
         return null;
     }
