@@ -62,9 +62,12 @@ const Admin = () => {
       const response = await fetch(`/api/products/${id}`, {
         method: "DELETE",
       });
-
+  
       if (response.ok) {
-        setProducts(products.filter((product) => product.id !== id));
+        // Re-fetch products from the backend to ensure updated data
+        const updatedResponse = await fetch("/api/products");
+        const updatedProducts = await updatedResponse.json();
+        setProducts(updatedProducts);
       } else {
         setError("Failed to remove product");
       }
@@ -73,7 +76,7 @@ const Admin = () => {
     } finally {
       setLoading(false);
     }
-  };
+  };  
 
   return (
     <div className="admin-container">
