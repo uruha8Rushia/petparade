@@ -42,7 +42,7 @@ const Login = () => {
           .catch((error) => console.error("Error fetching favourites:", error));
 
         if (data.role === "admin") {
-          navigate("/admin");
+          navigate("/home");
         } else {
           navigate("/home");
         }
