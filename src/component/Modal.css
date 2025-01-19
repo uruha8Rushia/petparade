@@ -46,18 +46,22 @@
 
 /* Styling the logout button */
 .user-profile-modal .logout-button {
-  padding: 12px 28px;
-  font-size: 16px;
-  background-color: #e74c3c; /* Default blue */
-  color: white;
-  border: none;
-  border-radius: 20px;
+  align-self: center;
+  background-color: #fff;
+  color: #000; 
+  border-radius: 20px; 
+  border: 2px solid #000; 
+  font-size: 1rem; 
+  padding: .75rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease-in-out; 
+  width: 130px; 
+  margin: 5px; 
 }
 
 .user-profile-modal .logout-button:hover {
-  background-color: #c0392b; /* Darker blue on hover */
+  background-color: rgb(235, 179, 179); 
+  color: #fff;
 }
 
 .user-info {
