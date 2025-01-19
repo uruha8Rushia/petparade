@@ -13,6 +13,7 @@ const Navbar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [products, setProducts] = useState([]); // Initialize products
   const [userProfile, setUserProfile] = useState(null);
+  const [userRole, setUserRole] = useState(null); // State for user role
 
   const { cartItems } = useCart();
   const { favourites, setFavourites } = useFavourites();
@@ -37,6 +38,28 @@ const Navbar = () => {
     };
 
     fetchProducts();
+  }, []);
+
+  // Fetch user role on component mount
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      const username = localStorage.getItem("username");
+      if (!username) return;
+
+      try {
+        const response = await fetch(`/api/user?username=${username}`);
+        if (response.ok) {
+          const data = await response.json();
+          setUserRole(data.role); // Set user role from API response
+        } else {
+          console.error("Failed to fetch user role");
+        }
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+      }
+    };
+
+    fetchUserRole();
   }, []);
 
   // Update search results based on search term
@@ -132,32 +155,35 @@ const Navbar = () => {
         </ul>
 
         <div className="nav-tools">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-            />
-            <button type="button" className="search-button">
-              <i className="fas fa-search"></i>
-            </button>
+          {/* Conditionally render search bar for non-admin users */}
+          {userRole !== "admin" && (
+            <div className="search-bar">
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+              <button type="button" className="search-button">
+                <i className="fas fa-search"></i>
+              </button>
 
-            {searchResults.length > 0 && (
-              <div className="search-results">
-                {searchResults.map((product) => (
-                  <div
-                    key={product.id}
-                    className="search-result-item"
-                    onClick={() => handleProductSelect(product)}
-                  >
-                    {product.name}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+              {searchResults.length > 0 && (
+                <div className="search-results">
+                  {searchResults.map((product) => (
+                    <div
+                      key={product.id}
+                      className="search-result-item"
+                      onClick={() => handleProductSelect(product)}
+                    >
+                      {product.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="nav-icons">
             <div className="nav-icon" onClick={() => openModal("Favorite Items")}>
